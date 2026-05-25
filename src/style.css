@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* ✅ v4 config อยู่ตรงนี้แทน tailwind.config.js */
+@variant dark (&:where(.dark, .dark *));

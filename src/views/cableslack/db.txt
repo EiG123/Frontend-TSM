@@ -1,0 +1,35 @@
+CREATE TABLE cableslack (
+    id SERIAL PRIMARY KEY,
+    
+    region VARCHAR(50) NOT NULL,
+    osp_problems_no VARCHAR(50) NOT NULL,
+    provice VARCHAR(50),
+    week VARCHAR(50),
+    route_ofc_ref VARCHAR(50),
+    route VARCHAR(50),
+    section VARCHAR(50),
+    detail TEXT,
+    latitude VARCHAR(50),
+    longitude VARCHAR(50),
+    wiring_distance VARCHAR(50),
+    solution VARCHAR(50),
+    url_picture_survey TEXT,
+    
+    cable_slack_status VARCHAR(50),
+    cable_slack_plan_date VARCHAR(50),
+    cable_slack_actual_date VARCHAR(50),
+    cable_slack_remark VARCHAR(50),
+
+    corrective_status VARCHAR(50),
+    corrective_status_plan_date VARCHAR(50),
+    corrective_status_actual_date VARCHAR(50),
+    corrective_status_remark VARCHAR(50),
+
+    prioity VARCHAR(50),
+
+    remark2 TEXT,
+    remark3 TEXT,
+
+    Team_Slack VARCHAR(50),
+    Team_Corrective VARCHAR(50),
+)

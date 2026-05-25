@@ -14,7 +14,7 @@ const emit = defineEmits<{
   close: [];
 }>();
 
-const isLoggedIn = computed(() => authStore.isAuthenticated);
+// const isLoggedIn = computed(() => authStore.isAuthenticated);
 const username = computed(() => authStore.user?.username || "User");
 const email = computed(() => authStore.user?.email || "user@gmail.com");
 

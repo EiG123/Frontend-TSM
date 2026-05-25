@@ -10,7 +10,7 @@ export const txt_to_excelManage = {
             txt_file,
             {
                 onUploadProgress: (e) => {
-                    const percent = Math.round((e.loaded * 100) / e.total);
+                    const percent = e.total ? Math.round((e.loaded * 100) / e.total) : 0; 
                     console.log("upload:", percent);
                 }
             }

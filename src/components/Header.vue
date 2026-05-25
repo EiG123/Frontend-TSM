@@ -3,7 +3,6 @@ import { useRouter } from "vue-router";
 import { computed } from "vue";
 import { useAuthStore } from "../stores/auth";
 import { useThemeStore } from "../stores/theme";
-import { defineStore } from "pinia";
 
 const themeStore = useThemeStore();
 
@@ -15,7 +14,7 @@ const props = defineProps<{
   onMenuClick?: () => void;
 }>();
 
-const isLoggedIn = computed(() => authStore.isAuthenticated);
+// const isLoggedIn = computed(() => authStore.isAuthenticated);
 const username = computed(() => authStore.user?.username || "User");
 
 const goProfile = () => {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed, watch } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -249,7 +249,7 @@ const confirmDelete = async () => {
   isDeleting.value = true;
   try {
     await CableFiberOpticManage.deleteCable(
-      cable.value.id ?? cable.value.cable_code
+      cable.value?.id ?? cable.value.cable_code
     );
     router.back();
   } catch (err) {
@@ -264,7 +264,7 @@ const confirmDelete = async () => {
 const handleDownload = async () => {
   try {
     const blob = await CableFiberOpticManage.downloadCable(
-      cable.value.id ?? cable.value.cable_code
+      cable.value?.id ?? cable.value?.cable_code
     );
 
     const url = window.URL.createObjectURL(blob);
@@ -272,7 +272,7 @@ const handleDownload = async () => {
     const a = document.createElement("a");
 
     a.href = url;
-    a.download = `cable_${cable.value.id}.kmz`;
+    a.download = `cable_${cable.value?.id}.kmz`;
 
     document.body.appendChild(a);
 
@@ -460,7 +460,7 @@ const formatDate = (date: string) => new Date(date).toLocaleString("th-TH");
                       key === 'updated_at'
                     "
                   >
-                    {{ formatDate(cable[key]) }}
+                    {{ formatDate(cable[key] as any) || null }}
                   </div>
                 </div>
               </dl>

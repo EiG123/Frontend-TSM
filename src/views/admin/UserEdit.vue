@@ -2,10 +2,8 @@
 import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../../stores/auth";
-import { AuthApiService } from "../../services/auth.api";
 import { AdminManage } from "../../services/admin/AdminManage.api";
 
-const authStore = useAuthStore();
 const router = useRouter();
 
 const props = defineProps<{
@@ -31,7 +29,7 @@ const showConfirmedPassword = ref(false);
 
 const role = ref("");
 const roleId = ref<number | null>(null);
-const allRole = ref([]);
+const allRole = ref<any[]>([]);
 
 const loadData = async () => {
   const resUser = await AdminManage.getUserById(userId.value);
@@ -104,10 +102,6 @@ const togglePasswordVisibility = () => {
 
 const toggleConfirmedPasswordVisibility = () => {
   showConfirmedPassword.value = !showConfirmedPassword.value;
-};
-
-const goLogin = () => {
-  router.push("/");
 };
 
 const goBack = () => {

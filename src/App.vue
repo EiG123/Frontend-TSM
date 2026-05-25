@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { useAuthStore } from "./stores/auth";
-import { useThemeStore } from "./stores/theme"; // ✅ เพิ่ม
 import Header from "./components/Header.vue";
 import Sidebar from "./components/Sidebar.vue";
 
 const authStore = useAuthStore();
-const themeStore = useThemeStore(); // ✅ เพิ่ม — init store ที่นี่เลย
 const isMobileMenuOpen = ref(false);
 
 onMounted(() => {

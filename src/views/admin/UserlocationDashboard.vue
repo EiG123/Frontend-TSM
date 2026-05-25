@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, shallowRef } from "vue";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { UserLocation } from "../../services/user/UserLoaction.api";
 
 interface UserLocationData {
+  username: string;
   user_id: number;
   latitude: number | string;
   longitude: number | string;
   updated_at?: string;
+  job: any;
 }
 
-const map = ref<L.Map | null>(null);
+const map = shallowRef<L.Map | any>(null);
 const markers = ref<Map<number, L.Marker>>(new Map());
 const locations = ref<UserLocationData[]>([]);
 const selectedUserId = ref<number | null>(null);

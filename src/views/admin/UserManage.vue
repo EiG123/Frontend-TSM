@@ -6,7 +6,7 @@ import { AdminManage } from "../../services/admin/AdminManage.api";
 const router = useRouter();
 
 const loading = ref(false);
-const UserList = ref([]);
+const UserList = ref<any[]>([]);
 const company = ref("");
 const searchQuery = ref("");
 

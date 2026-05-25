@@ -1,0 +1,42 @@
+# Fixes for bug_log.txt
+
+## 1. Unused Variables and Imports (TS6133)
+- **Action**: Remove all declared but unused variables and imports.
+- **Files affected**: `src/App.vue`, `src/main.ts`, `src/views/admin/TitleManagement.vue`, `src/views/admin/userEdit.vue`, `src/views/CableFiberOptic/CableFiberOpticDetail.vue`, `src/views/MainCableFiberOptic.vue`, `src/views/dev/AddPermission.vue`, `src/views/dev/RoleManage.vue`, `src/views/dev/userEdit.vue`, `src/views/home.vue`, `src/views/NetworkAvailability/DashBoardNetworkAVA.vue`, `src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue`, `src/views/NetworkAvailability/MainNetworkAvailability.vue`, `src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue`, `src/views/NetworkAvailability/UploadIncidentTT.vue`, `src/views/NetworkAvailability/UploadSiteAVA.vue`, `src/views/NetworkAvailability/UploadTop100SiteAVA.vue`, `src/views/PM.vue`, `src/views/pm/pm_add_cabinet.vue`, `src/views/pm/pm_cabinet_detail_page.vue`, `src/views/pm/pm_cabinet_page.vue`, `src/views/pm/pm_enter_data.vue`, `src/views/pm/pm_nodeb_new.vue`, `src/views/pm/pm_site_detail.vue`, `src/views/pm/pm_site_detail_site_data.vue`, `src/views/pm/pm_site_detail_site_data_data.vue`, `src/views/pm/title/pm_dropdown.vue`, `src/views/pm/title/pm_dropdown_add.vue`, `src/views/pm/title/pm_dropdown_member.vue`, `src/views/pm/title/pm_title.vue`, `src/views/pm/title/pm_title_add.vue`, `src/views/pm/title/pm_title_child.vue`, `src/views/pm/title/pm_title_child_add.vue`, `src/views/pm/title/pm_title_child_edit.vue`, `src/views/pm/title/pm_title_edit.vue`, `src/views/register.vue`, `src/views/Sites/sitesLocationView.vue`, `src/views/txt_to_excel/home.vue`.
+
+## 2. Case Sensitivity Issues (TS1261)
+- **Action**: Standardize file naming for `UserEdit.vue` and ensure imports in `src/router/index.ts` match the actual disk casing (PascalCase for Vue components is recommended).
+- **Files affected**: `src/router/index.ts`, `src/views/dev/UserEdit.vue`, `src/views/admin/UserEdit.vue`.
+
+## 3. Type-Only Imports (TS1484)
+- **Action**: Change `import { RouteLocationNormalized } from 'vue-router'` to `import type { RouteLocationNormalized } from 'vue-router'`.
+- **Files affected**: `src/router/index.ts`.
+
+## 4. Missing Type Definitions and Implicit Any (TS7006, TS7034, TS7005, TS7053)
+- **Action**:
+  - Provide explicit types for function parameters (e.g., `(item: any)` or define a proper interface).
+  - Define types for `chartInstance` and `toastTimer` in `DashBoardNetworkAVA.vue`.
+  - Add index signatures to objects like `filters` and `filterOptions` (e.g., `Record<string, string>`).
+- **Files affected**: `src/views/NetworkAvailability/DashBoardNetworkAVA.vue`, `src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue`, `src/views/dev/AddPermission.vue`, etc.
+
+## 5. "Property does not exist on type 'never'" (TS2339)
+- **Action**: Define proper types for `ref` arrays instead of using `ref([])`. For example, `const allRole = ref<Role[]>([]);`.
+- **Files affected**: `src/views/admin/userEdit.vue`, `src/views/admin/UserManage.vue`, `src/views/dev/AddPermission.vue`, `src/views/dev/RoleManage.vue`, `src/views/dev/userEdit.vue`, `src/views/dev/UserManage.vue`, `src/views/pm/pm_cabinet_page.vue`, `src/views/pm/pm_site_detail.vue`, `src/views/pm/title/pm_dropdown.vue`, `src/views/pm/title/pm_dropdown_member.vue`, `src/views/pm/title/pm_title.vue`, `src/views/pm/title/pm_title_child.vue`, `src/views/pm/title/pm_title_child_add.vue`, `src/views/pm/title/pm_title_child_edit.vue`.
+
+## 6. Null and Undefined Handling (TS18048, TS18047, TS2532, TS2322)
+- **Action**:
+  - Use optional chaining (`?.`) or nullish coalescing (`??`).
+  - Use type guards (e.g., `if (cable.value) { ... }`).
+  - Cast types when sure (e.g., `as number`).
+- **Files affected**: `src/services/TxtToExcel/txt_to_excelManage.api.ts`, `src/views/CableFiberOptic/CableFiberOpticDetail.vue`, `src/views/CableFiberOptic/CableFiberOpticViews.vue`, `src/views/NetworkAvailability/DashBoardNetworkAVA.vue`, `src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue`, `src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue`, `src/views/pm/pm_enter_data.vue`, `src/views/pm/pm_nodeb_new.vue`, `src/views/pm/title/pm_title.vue`.
+
+## 7. Specific Logic and Module Errors
+- **Leaflet**: Run `npm i --save-dev @types/leaflet`.
+- **`pmConfig.api`**: Verify if the file exists or fix the import path in `src/views/pm/pm_nodeb_new_V1.vue`.
+- **Unknown Error Type**: Use `if (error instanceof Error)` before accessing `error.message`.
+- **Incorrect Property Access**: Verify the interface/type of objects like `log` in `logMornitor.vue` and `user` in `UserlocationDashboard.vue`.
+- **`title_info.find` on string**: Ensure `title_info` is initialized as an array, not a string.
+- **`imgIndex + 1`**: Ensure `imgIndex` is cast to `number`.
+- **`goPMDropdown`**: Rename to `pmDropDown` if that was the intended function.
+- **`loadCable`**: Define the missing `loadCable` function in `src/views/Sites/sitesLocationView.vue`.
+- **`selectedFile`**: Fix type mismatch by ensuring the assigned value matches `File` or the expected object type.

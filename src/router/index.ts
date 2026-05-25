@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { RouteLocationNormalized } from 'vue-router'
 
 import Login from "../views/login.vue";
 import Register from "../views/register.vue";
@@ -9,12 +10,12 @@ import profile from "../views/profile.vue";
 
 import devDashboard from "../views/dev/DevManage.vue";
 import DevUserManage from "../views/dev/UserManage.vue";
-import DevUserEdit from "../views/dev/userEdit.vue";
+import DevUserEdit from "../views/dev/UserEdit.vue";
 import logMornitor from "../views/dev/logMornitor.vue";
 
 import AdminManage from "../views/admin/AdminManage.vue";
 import userManage from "../views/admin/UserManage.vue";
-import userEdit from "../views/admin/userEdit.vue";
+import userEdit from "../views/admin/UserEdit.vue";
 import RoleManage from "../views/dev/RoleManage.vue";
 import userPermissionEdit from "../views/dev/userPermissionEdit.vue";
 import AddPermission from "../views/dev/AddPermission.vue";
@@ -126,7 +127,7 @@ const routes = [
                 path: "/user/permissionedit",
                 name: "userPermissionEdit",
                 component: userPermissionEdit,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     id: route.query.id,
                 })
             },
@@ -142,7 +143,7 @@ const routes = [
             {
                 path: "/dev/userEdit",
                 component: DevUserEdit,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     id: route.query.id,
                 })
             },
@@ -170,7 +171,7 @@ const routes = [
                 path: "/user/edit",
                 name: "userEdit",
                 component: userEdit,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     id: route.query.id,
                 })
             },
@@ -228,7 +229,7 @@ const routes = [
             requiresAuth: true
         },
         component: CableFiberOpticDetail,
-        props: route => ({
+        props: (route: RouteLocationNormalized) => ({
             id: route.query.id,
         })
     },
@@ -306,7 +307,7 @@ const routes = [
             requiresAuth: true
         },
         component: Site_Improvement,
-        props: route => ({
+        props: (route: RouteLocationNormalized) => ({
             region: route.query.region,
         })
     },
@@ -338,7 +339,7 @@ const routes = [
                 path: "pm_page",
                 name: "pm_page",
                 component: pm_nodeb,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     type: route.query.type,
                 })
             },
@@ -346,7 +347,7 @@ const routes = [
                 path: "pm_nodeb_new",
                 name: "pm_nodeb_new",
                 component: pm_nodeb_new,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     type: route.query.type,
                 }),
                 meta: {
@@ -357,7 +358,7 @@ const routes = [
                 path: "pm_site_detail",
                 name: "pm_site_detail",
                 component: pm_site_detail,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     pmId: route.query.id,
                     type: route.query.type,
                 }),
@@ -366,7 +367,7 @@ const routes = [
                 path: "pm_site_detail_site_data",
                 name: "pm_site_detail_site_data",
                 component: pm_site_detail_site_data,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     pmId: route.query.pmId,
                     type: route.query.type,
                 }),
@@ -375,7 +376,7 @@ const routes = [
                 path: "pm_site_detail_site_info",
                 name: "pm_site_detail_site_info",
                 component: pm_site_detail_site_info,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     id: route.query.id,
                     type: route.query.type,
                 })
@@ -384,7 +385,7 @@ const routes = [
                 path: "pm_site_detail_site_data_data",
                 name: "pm_site_detail_site_data_data",
                 component: pm_site_detail_site_data_data,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     pmId: route.query.pmId,
                     key: route.query.key,
                     type: route.query.type,
@@ -395,7 +396,7 @@ const routes = [
                 path: "pm_site_detail_site_data_enter_data",
                 name: "pm_site_detail_site_data_enter_data",
                 component: pm_site_detail_site_data_enter_data,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     pmId: route.query.pmId,
                     title: route.query.title,
                     title_id: route.query.title_id,
@@ -406,7 +407,7 @@ const routes = [
                 path: "pm_enter_data",
                 name: "pm_enter_data",
                 component: pm_enter_data,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     pmId: route.query.pmId,
                     title_id: route.query.title_id,
                     title_child_id: route.query.title_child_id,
@@ -417,7 +418,7 @@ const routes = [
                 path: "pm_add_cabinet",
                 name: "pm_add_cabinet",
                 component: pm_add_cabinet,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     pmId: route.query.pmId,
                 })
             },
@@ -425,7 +426,7 @@ const routes = [
                 path: "pm_cabinet_page",
                 name: "pm_cabinet_page",
                 component: pm_cabinet_page,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     pmId: route.query.pmId,
                 })
             },
@@ -433,7 +434,7 @@ const routes = [
                 path: "pm_cabinet_detail_page",
                 name: "pm_cabinet_detail_page",
                 component: pm_cabinet_detail_page,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     cabinetId: route.query.cabinet_id
                 })
             },
@@ -491,7 +492,7 @@ const routes = [
                 path: "pm_title_child_edit",
                 name: "pm_title_child_edit",
                 component: pm_title_child_edit,
-                props: route => ({
+                props: (route: RouteLocationNormalized) => ({
                     title_id: route.query.title_id,
                     title_child_id: route.query.title_child_id,
                 })
@@ -527,7 +528,7 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, _from, next) => {
     const { useAuthStore } = await import("../stores/auth");
     const authStore = useAuthStore();
 

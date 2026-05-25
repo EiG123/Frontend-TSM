@@ -251,8 +251,8 @@ watch(selectedCableCode, (code) => {
   const lngs = coords.map((c) => c[0]);
   const lats = coords.map((c) => c[1]);
   const bounds = new maplibregl.LngLatBounds(
-    [Math.min(...lngs), Math.min(...lats)],
-    [Math.max(...lngs), Math.max(...lats)]
+    [lngs.length ? Math.min(...lngs) : 0, lats.length ? Math.min(...lats) : 0],
+    [lngs.length ? Math.max(...lngs) : 0, lats.length ? Math.max(...lats) : 0]
   );
 
   map.fitBounds(bounds, { padding: 80, duration: 900, maxZoom: 17 });

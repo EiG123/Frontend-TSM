@@ -1,0 +1,1953 @@
+src/App.vue:4:1 - error TS6133: 'useThemeStore' is declared but its value is never read.
+
+4 import { useThemeStore } from "./stores/theme"; // ✅ เพิ่ม
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/main.ts:6:1 - error TS6133: 'useThemeStore' is declared but its value is never read.
+
+6 import { useThemeStore } from './stores/theme';
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/router/index.ts:2:10 - error TS1484: 'RouteLocationNormalized' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+
+2 import { RouteLocationNormalized } from 'vue-router'
+           ~~~~~~~~~~~~~~~~~~~~~~~
+
+src/router/index.ts:13:25 - error TS1261: Already included file name 'D:/Users/WINDOWS 10/Desktop/Frontend TSM/frontend/src/views/dev/userEdit.vue' differs from file name 'D:/Users/WINDOWS 10/Desktop/Frontend TSM/frontend/src/views/dev/UserEdit.vue' only in casing.
+  The file is in the program because:
+    Imported via "../views/dev/userEdit.vue" from file 'D:/Users/WINDOWS 10/Desktop/Frontend TSM/frontend/src/router/index.ts'
+    Matched by include pattern 'src/**/*.vue' in 'D:/Users/WINDOWS 10/Desktop/Frontend TSM/frontend/tsconfig.app.json'
+
+13 import DevUserEdit from "../views/dev/userEdit.vue";
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  tsconfig.app.json:15:46
+    15   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.html"]
+                                                    ~~~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+src/router/index.ts:18:22 - error TS1261: Already included file name 'D:/Users/WINDOWS 10/Desktop/Frontend TSM/frontend/src/views/admin/userEdit.vue' differs from file name 'D:/Users/WINDOWS 10/Desktop/Frontend TSM/frontend/src/views/admin/UserEdit.vue' only in casing.
+  The file is in the program because:
+    Imported via "../views/admin/userEdit.vue" from file 'D:/Users/WINDOWS 10/Desktop/Frontend TSM/frontend/src/router/index.ts'
+    Matched by include pattern 'src/**/*.vue' in 'D:/Users/WINDOWS 10/Desktop/Frontend TSM/frontend/tsconfig.app.json'
+
+18 import userEdit from "../views/admin/userEdit.vue";
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  tsconfig.app.json:15:46
+    15   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.html"]
+                                                    ~~~~~~~~~~~~~~
+    File is matched by include pattern specified here.
+
+src/router/index.ts:531:30 - error TS6133: 'from' is declared but its value is never read.
+
+531 router.beforeEach(async (to, from, next) => {
+                                 ~~~~
+
+src/services/TxtToExcel/txt_to_excelManage.api.ts:13:67 - error TS18048: 'e.total' is possibly 'undefined'.
+
+13                     const percent = Math.round((e.loaded * 100) / e.total);
+                                                                     ~~~~~~~
+
+src/views/admin/TitleManagement.vue:5:7 - error TS6133: 'TitleList' is declared but its value is never read.
+
+5 const TitleList = ref([]);
+        ~~~~~~~~~
+
+src/views/admin/userEdit.vue:5:1 - error TS6133: 'AuthApiService' is declared but its value is never read.
+
+5 import { AuthApiService } from "../../services/auth.api";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/admin/userEdit.vue:8:7 - error TS6133: 'authStore' is declared but its value is never read.
+
+8 const authStore = useAuthStore();
+        ~~~~~~~~~
+
+src/views/admin/userEdit.vue:109:7 - error TS6133: 'goLogin' is declared but its value is never read.
+
+109 const goLogin = () => {
+          ~~~~~~~
+
+src/views/admin/userEdit.vue:679:58 - error TS2339: Property 'id' does not exist on type 'never'.
+
+679                   <option v-for="r in allRole" :value="r.id" :key="r.id">
+                                                             ~~
+
+src/views/admin/userEdit.vue:679:70 - error TS2339: Property 'id' does not exist on type 'never'.
+
+679                   <option v-for="r in allRole" :value="r.id" :key="r.id">
+                                                                         ~~
+
+src/views/admin/userEdit.vue:680:26 - error TS2339: Property 'name' does not exist on type 'never'.
+
+680                     {{ r.name }}
+                             ~~~~
+
+src/views/admin/UserlocationDashboard.vue:3:15 - error TS7016: Could not find a declaration file for module 'leaflet'. 'D:/Users/WINDOWS 10/Desktop/Frontend TSM/frontend/node_modules/leaflet/dist/leaflet-src.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/leaflet` if it exists or add a new declaration (.d.ts) file containing `declare module 'leaflet';`
+
+3 import L from "leaflet";
+                ~~~~~~~~~
+
+src/views/admin/UserlocationDashboard.vue:199:28 - error TS2339: Property 'username' does not exist on type '{ user_id: number; latitude: string | number; longitude: string | number; updated_at?: string | undefined; }'.
+
+199                 👤 {{ user.username }}
+                               ~~~~~~~~
+
+src/views/admin/UserlocationDashboard.vue:235:37 - error TS2339: Property 'job' does not exist on type '{ user_id: number; latitude: string | number; longitude: string | number; updated_at?: string | undefined; }'.
+
+235                 </svg>Go to {{ user.job }}
+                                        ~~~
+
+src/views/admin/UserManage.vue:32:22 - error TS2339: Property 'company' does not exist on type 'never'.
+
+32       (user) => user.company?.toLowerCase() === company.value.toLowerCase()
+                        ~~~~~~~
+
+src/views/admin/UserManage.vue:41:14 - error TS2339: Property 'username' does not exist on type 'never'.
+
+41         user.username?.toLowerCase().includes(query) ||
+                ~~~~~~~~
+
+src/views/admin/UserManage.vue:42:14 - error TS2339: Property 'email' does not exist on type 'never'.
+
+42         user.email?.toLowerCase().includes(query) ||
+                ~~~~~
+
+src/views/admin/UserManage.vue:43:14 - error TS2339: Property 'phone' does not exist on type 'never'.
+
+43         user.phone?.toLowerCase().includes(query)
+                ~~~~~
+
+src/views/admin/UserManage.vue:270:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+270               :key="item.id"
+                             ~~
+
+src/views/admin/UserManage.vue:276:25 - error TS2339: Property 'id' does not exist on type 'never'.
+
+276                 {{ item.id }}
+                            ~~
+
+src/views/admin/UserManage.vue:285:29 - error TS2339: Property 'username' does not exist on type 'never'.
+
+285                     {{ item.username?.charAt(0).toUpperCase() || "?" }}
+                                ~~~~~~~~
+
+src/views/admin/UserManage.vue:287:53 - error TS2339: Property 'username' does not exist on type 'never'.
+
+287                   <span class="font-medium">{{ item.username || "-" }}</span>
+                                                        ~~~~~~~~
+
+src/views/admin/UserManage.vue:291:25 - error TS2339: Property 'email' does not exist on type 'never'.
+
+291                 {{ item.email }}
+                            ~~~~~
+
+src/views/admin/UserManage.vue:294:25 - error TS2339: Property 'phone' does not exist on type 'never'.
+
+294                 {{ item.phone || "-" }}
+                            ~~~~~
+
+src/views/admin/UserManage.vue:300:27 - error TS2339: Property 'company' does not exist on type 'never'.
+
+300                   {{ item.company?.toUpperCase() || "-" }}
+                              ~~~~~~~
+
+src/views/admin/UserManage.vue:307:26 - error TS2339: Property 'role' does not exist on type 'never'.
+
+307                     item.role === 'admin'
+                             ~~~~
+
+src/views/admin/UserManage.vue:312:27 - error TS2339: Property 'role' does not exist on type 'never'.
+
+312                   {{ item.role?.toUpperCase() || "USER" }}
+                              ~~~~
+
+src/views/admin/UserManage.vue:319:26 - error TS2339: Property 'status' does not exist on type 'never'.
+
+319                     item.status === 'active'
+                             ~~~~~~
+
+src/views/admin/UserManage.vue:324:27 - error TS2339: Property 'status' does not exist on type 'never'.
+
+324                   {{ item.status === "active" ? "Active" : "Inactive" }}
+                              ~~~~~~
+
+src/views/admin/UserManage.vue:330:45 - error TS2339: Property 'id' does not exist on type 'never'.
+
+330                     @click="handleEdit(item.id)"
+                                                ~~
+
+src/views/admin/UserManage.vue:336:47 - error TS2339: Property 'id' does not exist on type 'never'.
+
+336                     @click="handleDelete(item.id, item.username)"
+                                                  ~~
+
+src/views/admin/UserManage.vue:336:56 - error TS2339: Property 'username' does not exist on type 'never'.
+
+336                     @click="handleDelete(item.id, item.username)"
+                                                           ~~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticDetail.vue:2:39 - error TS6133: 'computed' is declared but its value is never read.
+
+2 import { ref, onMounted, onUnmounted, computed, watch } from "vue";
+                                        ~~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticDetail.vue:2:49 - error TS6133: 'watch' is declared but its value is never read.
+
+2 import { ref, onMounted, onUnmounted, computed, watch } from "vue";
+                                                  ~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticDetail.vue:267:7 - error TS18047: 'cable.value' is possibly 'null'.
+
+267       cable.value.id ?? cable.value.cable_code
+          ~~~~~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticDetail.vue:267:25 - error TS18047: 'cable.value' is possibly 'null'.
+
+267       cable.value.id ?? cable.value.cable_code
+                            ~~~~~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticDetail.vue:275:27 - error TS18047: 'cable.value' is possibly 'null'.
+
+275     a.download = `cable_${cable.value.id}.kmz`;
+                              ~~~~~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticDetail.vue:463:35 - error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+
+463                     {{ formatDate(cable[key]) }}
+                                      ~~~~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticViews.vue:254:15 - error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+
+254     [Math.min(...lngs), Math.min(...lats)],
+                  ~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticViews.vue:254:34 - error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+
+254     [Math.min(...lngs), Math.min(...lats)],
+                                     ~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticViews.vue:255:15 - error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+
+255     [Math.max(...lngs), Math.max(...lats)]
+                  ~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticViews.vue:255:34 - error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+
+255     [Math.max(...lngs), Math.max(...lats)]
+                                     ~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticViews.vue:274:19 - error TS2532: Object is possibly 'undefined'.
+
+274     const props = e.features[0].properties as CableProperties;
+                      ~~~~~~~~~~~~~
+
+src/views/CableFiberOptic/CableFiberOpticViews.vue:295:19 - error TS2532: Object is possibly 'undefined'.
+
+295     const props = e.features[0].properties as CableProperties;
+                      ~~~~~~~~~~~~~
+
+src/views/CableFiberOptic/MainCableFiberOptic.vue:8:7 - error TS6133: 'themeStore' is declared but its value is never read.
+
+8 const themeStore = useThemeStore();
+        ~~~~~~~~~~
+
+src/views/dev/AddPermission.vue:6:7 - error TS6133: 'router' is declared but its value is never read.
+
+6 const router = useRouter();
+        ~~~~~~
+
+src/views/dev/AddPermission.vue:41:24 - error TS7006: Parameter 'item' implicitly has an 'any' type.
+
+41 const openEditModal = (item) => {
+                          ~~~~
+
+src/views/dev/AddPermission.vue:88:29 - error TS7006: Parameter 'id' implicitly has an 'any' type.
+
+88 const handleDelete = async (id, name) => {
+                               ~~
+
+src/views/dev/AddPermission.vue:88:33 - error TS7006: Parameter 'name' implicitly has an 'any' type.
+
+88 const handleDelete = async (id, name) => {
+                                   ~~~~
+
+src/views/dev/AddPermission.vue:187:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+187               :key="item.id"
+                             ~~
+
+src/views/dev/AddPermission.vue:191:25 - error TS2339: Property 'id' does not exist on type 'never'.
+
+191                 {{ item.id }}
+                            ~~
+
+src/views/dev/AddPermission.vue:194:25 - error TS2339: Property 'name' does not exist on type 'never'.
+
+194                 {{ item.name }}
+                            ~~~~
+
+src/views/dev/AddPermission.vue:197:25 - error TS2339: Property 'description' does not exist on type 'never'.
+
+197                 {{ item.description }}
+                            ~~~~~~~~~~~
+
+src/views/dev/AddPermission.vue:208:47 - error TS2339: Property 'id' does not exist on type 'never'.
+
+208                     @click="handleDelete(item.id, item.name)"
+                                                  ~~
+
+src/views/dev/AddPermission.vue:208:56 - error TS2339: Property 'name' does not exist on type 'never'.
+
+208                     @click="handleDelete(item.id, item.name)"
+                                                           ~~~~
+
+src/views/dev/logMornitor.vue:471:29 - error TS2339: Property 'description' does not exist on type '{ id: number; user_id: number; username: string; email: string; role: string; action: string; detail: string; endpoint: string; method: string; success: boolean; created_at: string; }'.
+
+471                 :title="log.description"
+                                ~~~~~~~~~~~
+
+src/views/dev/logMornitor.vue:473:24 - error TS2339: Property 'description' does not exist on type '{ id: number; user_id: number; username: string; email: string; role: string; action: string; detail: string; endpoint: string; method: string; success: boolean; created_at: string; }'.
+
+473                 {{ log.description }}
+                           ~~~~~~~~~~~
+
+src/views/dev/logMornitor.vue:481:44 - error TS2339: Property 'old_data' does not exist on type '{ id: number; user_id: number; username: string; email: string; role: string; action: string; detail: string; endpoint: string; method: string; success: boolean; created_at: string; }'.
+
+481                   {{ formatJsonPreview(log.old_data) }}
+                                               ~~~~~~~~
+
+src/views/dev/logMornitor.vue:485:29 - error TS2339: Property 'old_data' does not exist on type '{ id: number; user_id: number; username: string; email: string; role: string; action: string; detail: string; endpoint: string; method: string; success: boolean; created_at: string; }'.
+
+485                   v-if="log.old_data"
+                                ~~~~~~~~
+
+src/views/dev/logMornitor.vue:486:57 - error TS2339: Property 'old_data' does not exist on type '{ id: number; user_id: number; username: string; email: string; role: string; action: string; detail: string; endpoint: string; method: string; success: boolean; created_at: string; }'.
+
+486                   @click="openJsonModal('Old Data', log.old_data)"
+                                                            ~~~~~~~~
+
+src/views/dev/logMornitor.vue:498:44 - error TS2339: Property 'new_data' does not exist on type '{ id: number; user_id: number; username: string; email: string; role: string; action: string; detail: string; endpoint: string; method: string; success: boolean; created_at: string; }'.
+
+498                   {{ formatJsonPreview(log.new_data) }}
+                                               ~~~~~~~~
+
+src/views/dev/logMornitor.vue:502:29 - error TS2339: Property 'new_data' does not exist on type '{ id: number; user_id: number; username: string; email: string; role: string; action: string; detail: string; endpoint: string; method: string; success: boolean; created_at: string; }'.
+
+502                   v-if="log.new_data"
+                                ~~~~~~~~
+
+src/views/dev/logMornitor.vue:503:57 - error TS2339: Property 'new_data' does not exist on type '{ id: number; user_id: number; username: string; email: string; role: string; action: string; detail: string; endpoint: string; method: string; success: boolean; created_at: string; }'.
+
+503                   @click="openJsonModal('New Data', log.new_data)"
+                                                            ~~~~~~~~
+
+src/views/dev/RoleManage.vue:10:7 - error TS6133: 'company' is declared but its value is never read.
+
+10 const company = ref("");
+         ~~~~~~~
+
+src/views/dev/RoleManage.vue:63:18 - error TS2339: Property 'name' does not exist on type 'never'.
+
+63         RoleList.name?.toLowerCase().includes(query) ||
+                    ~~~~
+
+src/views/dev/RoleManage.vue:64:18 - error TS2339: Property 'description' does not exist on type 'never'.
+
+64         RoleList.description?.toLowerCase().includes(query)
+                    ~~~~~~~~~~~
+
+src/views/dev/RoleManage.vue:305:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+305               :key="item.id"
+                             ~~
+
+src/views/dev/RoleManage.vue:311:25 - error TS2339: Property 'id' does not exist on type 'never'.
+
+311                 {{ item.id }}
+                            ~~
+
+src/views/dev/RoleManage.vue:320:29 - error TS2339: Property 'name' does not exist on type 'never'.
+
+320                     {{ item.name?.charAt(0).toUpperCase() || "?" }}
+                                ~~~~
+
+src/views/dev/RoleManage.vue:322:53 - error TS2339: Property 'name' does not exist on type 'never'.
+
+322                   <span class="font-medium">{{ item.name || "-" }}</span>
+                                                        ~~~~
+
+src/views/dev/RoleManage.vue:326:25 - error TS2339: Property 'description' does not exist on type 'never'.
+
+326                 {{ item.description || "-" }}
+                            ~~~~~~~~~~~
+
+src/views/dev/RoleManage.vue:331:47 - error TS2339: Property 'id' does not exist on type 'never'.
+
+331                     @click="handleDelete(item.id, item.name)"
+                                                  ~~
+
+src/views/dev/RoleManage.vue:331:56 - error TS2339: Property 'name' does not exist on type 'never'.
+
+331                     @click="handleDelete(item.id, item.name)"
+                                                           ~~~~
+
+src/views/dev/userEdit.vue:7:7 - error TS6133: 'authStore' is declared but its value is never read.
+
+7 const authStore = useAuthStore();
+        ~~~~~~~~~
+
+src/views/dev/userEdit.vue:104:7 - error TS6133: 'goLogin' is declared but its value is never read.
+
+104 const goLogin = () => {
+          ~~~~~~~
+
+src/views/dev/userEdit.vue:674:58 - error TS2339: Property 'id' does not exist on type 'never'.
+
+674                   <option v-for="r in allRole" :value="r.id" :key="r.id">
+                                                             ~~
+
+src/views/dev/userEdit.vue:674:70 - error TS2339: Property 'id' does not exist on type 'never'.
+
+674                   <option v-for="r in allRole" :value="r.id" :key="r.id">
+                                                                         ~~
+
+src/views/dev/userEdit.vue:675:26 - error TS2339: Property 'name' does not exist on type 'never'.
+
+675                     {{ r.name }}
+                             ~~~~
+
+src/views/dev/UserManage.vue:32:22 - error TS2339: Property 'company' does not exist on type 'never'.
+
+32       (user) => user.company?.toLowerCase() === company.value.toLowerCase()
+                        ~~~~~~~
+
+src/views/dev/UserManage.vue:41:14 - error TS2339: Property 'username' does not exist on type 'never'.
+
+41         user.username?.toLowerCase().includes(query) ||
+                ~~~~~~~~
+
+src/views/dev/UserManage.vue:42:14 - error TS2339: Property 'email' does not exist on type 'never'.
+
+42         user.email?.toLowerCase().includes(query) ||
+                ~~~~~
+
+src/views/dev/UserManage.vue:43:14 - error TS2339: Property 'phone' does not exist on type 'never'.
+
+43         user.phone?.toLowerCase().includes(query)
+                ~~~~~
+
+src/views/dev/UserManage.vue:270:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+270               :key="item.id"
+                             ~~
+
+src/views/dev/UserManage.vue:276:25 - error TS2339: Property 'id' does not exist on type 'never'.
+
+276                 {{ item.id }}
+                            ~~
+
+src/views/dev/UserManage.vue:285:29 - error TS2339: Property 'username' does not exist on type 'never'.
+
+285                     {{ item.username?.charAt(0).toUpperCase() || "?" }}
+                                ~~~~~~~~
+
+src/views/dev/UserManage.vue:287:53 - error TS2339: Property 'username' does not exist on type 'never'.
+
+287                   <span class="font-medium">{{ item.username || "-" }}</span>
+                                                        ~~~~~~~~
+
+src/views/dev/UserManage.vue:291:25 - error TS2339: Property 'email' does not exist on type 'never'.
+
+291                 {{ item.email }}
+                            ~~~~~
+
+src/views/dev/UserManage.vue:294:25 - error TS2339: Property 'phone' does not exist on type 'never'.
+
+294                 {{ item.phone || "-" }}
+                            ~~~~~
+
+src/views/dev/UserManage.vue:300:27 - error TS2339: Property 'company' does not exist on type 'never'.
+
+300                   {{ item.company?.toUpperCase() || "-" }}
+                              ~~~~~~~
+
+src/views/dev/UserManage.vue:307:26 - error TS2339: Property 'role' does not exist on type 'never'.
+
+307                     item.role === 'admin'
+                             ~~~~
+
+src/views/dev/UserManage.vue:312:27 - error TS2339: Property 'role' does not exist on type 'never'.
+
+312                   {{ item.role?.toUpperCase() || "USER" }}
+                              ~~~~
+
+src/views/dev/UserManage.vue:319:26 - error TS2339: Property 'status' does not exist on type 'never'.
+
+319                     item.status === 'active'
+                             ~~~~~~
+
+src/views/dev/UserManage.vue:324:27 - error TS2339: Property 'status' does not exist on type 'never'.
+
+324                   {{ item.status === "active" ? "Active" : "Inactive" }}
+                              ~~~~~~
+
+src/views/dev/UserManage.vue:330:45 - error TS2339: Property 'id' does not exist on type 'never'.
+
+330                     @click="handleEdit(item.id)"
+                                                ~~
+
+src/views/dev/UserManage.vue:336:47 - error TS2339: Property 'id' does not exist on type 'never'.
+
+336                     @click="handleDelete(item.id, item.username)"
+                                                  ~~
+
+src/views/dev/UserManage.vue:336:56 - error TS2339: Property 'username' does not exist on type 'never'.
+
+336                     @click="handleDelete(item.id, item.username)"
+                                                           ~~~~~~~~
+
+src/views/home.vue:8:7 - error TS6133: 'themeStore' is declared but its value is never read.
+
+8 const themeStore = useThemeStore();
+        ~~~~~~~~~~
+
+src/views/home.vue:25:7 - error TS6133: 'goToCableFiberOptic' is declared but its value is never read.
+
+25 const goToCableFiberOptic = () =>
+         ~~~~~~~~~~~~~~~~~~~
+
+src/views/home.vue:30:7 - error TS6133: 'goToCableFiberOpticViews' is declared but its value is never read.
+
+30 const goToCableFiberOpticViews = () =>
+         ~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:2:25 - error TS6133: 'onMounted' is declared but its value is never read.
+
+2 import { ref, computed, onMounted, onUnmounted } from "vue";
+                          ~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:39:7 - error TS6133: 'ALL_site' is declared but its value is never read.
+
+39 const ALL_site = [
+         ~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:86:29 - error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+86       cal_avg += parseFloat(vals[x]);
+                               ~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:140:3 - error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+140   endDate.value = end.toISOString().split("T")[0];
+      ~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:141:3 - error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+141   startDate.value = start.toISOString().split("T")[0];
+      ~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:223:24 - error TS7006: Parameter 'v' implicitly has an 'any' type.
+
+223             callback: (v) => `${v}%`,
+                           ~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:235:17 - error TS7006: Parameter '_evt' implicitly has an 'any' type.
+
+235       onClick: (_evt, elements) => {
+                    ~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:235:23 - error TS7006: Parameter 'elements' implicitly has an 'any' type.
+
+235       onClick: (_evt, elements) => {
+                          ~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:239:34 - error TS18048: 'clicked' is possibly 'undefined'.
+
+239           selectedDate.value === clicked.date ? null : clicked.date;
+                                     ~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:239:56 - error TS18048: 'clicked' is possibly 'undefined'.
+
+239           selectedDate.value === clicked.date ? null : clicked.date;
+                                                           ~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:248:25 - error TS7006: Parameter 'ctx' implicitly has an 'any' type.
+
+248             afterBody: (ctx) => {
+                            ~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:250:17 - error TS2532: Object is possibly 'undefined'.
+
+250                 chartData.value[ctx[0].dataIndex].incidents ?? [];
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:268:7 - error TS6133: 'clearFilter' is declared but its value is never read.
+
+268 const clearFilter = () => {
+          ~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:314:27 - error TS7006: Parameter 'isoString' implicitly has an 'any' type.
+
+314 const formatToReadable = (isoString) => {
+                              ~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:582:63 - error TS2339: Property 'ticket' does not exist on type 'Incident & { date: string; }'.
+
+582                   <td class="px-5 py-3 text-slate-700">{{ row.ticket }}</td>
+                                                                  ~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:584:63 - error TS2339: Property 'severity' does not exist on type 'Incident & { date: string; }'.
+
+584                   <td class="px-5 py-3 text-slate-700">{{ row.severity }}</td>
+                                                                  ~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:588:63 - error TS2339: Property 'cause' does not exist on type 'Incident & { date: string; }'.
+
+588                   <td class="px-5 py-3 text-slate-700">{{ row.cause }}</td>
+                                                                  ~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:590:63 - error TS2339: Property 'problem' does not exist on type 'Incident & { date: string; }'.
+
+590                   <td class="px-5 py-3 text-slate-700">{{ row.problem }}</td>
+                                                                  ~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:592:63 - error TS2339: Property 'remedy' does not exist on type 'Incident & { date: string; }'.
+
+592                   <td class="px-5 py-3 text-slate-700">{{ row.remedy }}</td>
+                                                                  ~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:595:45 - error TS2339: Property 'fault_datetime' does not exist on type 'Incident & { date: string; }'.
+
+595                     {{ formatToReadable(row.fault_datetime) }}
+                                                ~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA.vue:598:45 - error TS2339: Property 'restoration_datetime' does not exist on type 'Incident & { date: string; }'.
+
+598                     {{ formatToReadable(row.restoration_datetime) }}
+                                                ~~~~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:2:25 - error TS6133: 'onMounted' is declared but its value is never read.
+
+2 import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+                          ~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:93:5 - error TS2532: Object is possibly 'undefined'.
+
+93     grouped[row.date].total += Number(row.availability);
+       ~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:94:5 - error TS2532: Object is possibly 'undefined'.
+
+94     grouped[row.date].count += 1;
+       ~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:96:7 - error TS2532: Object is possibly 'undefined'.
+
+96       grouped[row.date].incidents.push(...row.incidents);
+         ~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:221:10 - error TS6133: 'getAvailabilityBadgeClass' is declared but its value is never read.
+
+221 function getAvailabilityBadgeClass(value: number): string {
+             ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:233:3 - error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+233   endDate.value = end.toISOString().split("T")[0];
+      ~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:234:3 - error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+234   startDate.value = start.toISOString().split("T")[0];
+      ~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:315:24 - error TS7006: Parameter 'v' implicitly has an 'any' type.
+
+315             callback: (v) => `${v}%`,
+                           ~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:326:23 - error TS7006: Parameter '_evt' implicitly has an 'any' type.
+
+326       onClick: async (_evt, elements) => {
+                          ~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:326:29 - error TS7006: Parameter 'elements' implicitly has an 'any' type.
+
+326       onClick: async (_evt, elements) => {
+                                ~~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:329:36 - error TS18048: 'clicked' is possibly 'undefined'.
+
+329         if (selectedDate.value === clicked.date) {
+                                       ~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:335:30 - error TS18048: 'clicked' is possibly 'undefined'.
+
+335         selectedDate.value = clicked.date;
+                                 ~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:337:30 - error TS18048: 'clicked' is possibly 'undefined'.
+
+337         await fetchIncidents(clicked.date);
+                                 ~~~~~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:345:25 - error TS7006: Parameter 'ctx' implicitly has an 'any' type.
+
+345             afterBody: (ctx) => {
+                            ~~~
+
+src/views/NetworkAvailability/DashBoardNetworkAVA_ALL.vue:347:17 - error TS2532: Object is possibly 'undefined'.
+
+347                 aggregateChartData.value[ctx[0].dataIndex].incidents ?? [];
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/MainNetworkAvailability.vue:8:7 - error TS6133: 'themeStore' is declared but its value is never read.
+
+8 const themeStore = useThemeStore();
+        ~~~~~~~~~~
+
+src/views/NetworkAvailability/MainNetworkAvailability.vue:13:7 - error TS6133: 'goPM' is declared but its value is never read.
+
+13 const goPM = () => router.push("/PM");
+         ~~~~
+
+src/views/NetworkAvailability/MainNetworkAvailability.vue:14:7 - error TS6133: 'goCableSlack' is declared but its value is never read.
+
+14 const goCableSlack = () => router.push("/CableSlack");
+         ~~~~~~~~~~~~
+
+src/views/NetworkAvailability/MainNetworkAvailability.vue:15:7 - error TS6133: 'goTxTtoExcel' is declared but its value is never read.
+
+15 const goTxTtoExcel = () => router.push("/txt_to_excel");
+         ~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:13:10 - error TS6133: 'setTheme' is declared but its value is never read.
+
+13 function setTheme(t) {
+            ~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:13:19 - error TS7006: Parameter 't' implicitly has an 'any' type.
+
+13 function setTheme(t) {
+                     ~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:23:17 - error TS7006: Parameter 'e' implicitly has an 'any' type.
+
+23 function onDrop(e) {
+                   ~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:29:23 - error TS7006: Parameter 'e' implicitly has an 'any' type.
+
+29 function onFileChange(e) {
+                         ~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:34:19 - error TS7006: Parameter 'file' implicitly has an 'any' type.
+
+34 function loadFile(file) {
+                     ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:38:33 - error TS18047: 'e.target' is possibly 'null'.
+
+38     const data = new Uint8Array(e.target.result)
+                                   ~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:38:33 - error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type 'string | ArrayBuffer | null' is not assignable to parameter of type 'ArrayBuffer | ArrayLike<number>'.
+      Type 'null' is not assignable to type 'ArrayBuffer | ArrayLike<number>'.
+
+38     const data = new Uint8Array(e.target.result)
+                                   ~~~~~~~~~~~~~~~
+
+  node_modules/typescript/lib/lib.es5.d.ts:2414:5
+    2414     new (array: ArrayLike<number> | ArrayBuffer): Uint8Array<ArrayBuffer>;
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    The last overload is declared here.
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:39:29 - error TS2339: Property 'XLSX' does not exist on type 'Window & typeof globalThis'.
+
+39     const workbook = window.XLSX.read(data, { type: 'array' })
+                               ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:41:28 - error TS2339: Property 'XLSX' does not exist on type 'Window & typeof globalThis'.
+
+41     rawData.value = window.XLSX.utils.sheet_to_json(sheet)
+                              ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:66:17 - error TS7006: Parameter 'field' implicitly has an 'any' type.
+
+66 function unique(field, data) {
+                   ~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:66:24 - error TS7006: Parameter 'data' implicitly has an 'any' type.
+
+66 function unique(field, data) {
+                          ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:67:31 - error TS7006: Parameter 'd' implicitly has an 'any' type.
+
+67   return [...new Set(data.map(d => d[field]))].filter(v => v !== undefined && v !== null && v !== '').sort()
+                                 ~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:70:19 - error TS7006: Parameter 'stopField' implicitly has an 'any' type.
+
+70 function poolUpTo(stopField) {
+                     ~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:74:15 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+
+74     const v = filters[step.id]
+                 ~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:82:5 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: never[]; province: never[]; amphur: never[]; tambol: never[]; system: never[]; operator: never[]; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: never[]; province: never[]; amphur: never[]; tambol: never[]; system: never[]; operator: never[]; }'.
+
+82     filterOptions[id] = unique(field, rawData.value)
+       ~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:83:5 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+
+83     filters[id] = ''
+       ~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:87:25 - error TS7006: Parameter 'changedId' implicitly has an 'any' type.
+
+87 function onFilterChange(changedId) {
+                           ~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:91:27 - error TS18048: 'step' is possibly 'undefined'.
+
+91     const pool = poolUpTo(step.field)
+                             ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:92:5 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: never[]; province: never[]; amphur: never[]; tambol: never[]; system: never[]; operator: never[]; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: never[]; province: never[]; amphur: never[]; tambol: never[]; system: never[]; operator: never[]; }'.
+
+92     filterOptions[step.id] = unique(step.field, pool)
+       ~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:92:19 - error TS18048: 'step' is possibly 'undefined'.
+
+92     filterOptions[step.id] = unique(step.field, pool)
+                     ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:92:37 - error TS18048: 'step' is possibly 'undefined'.
+
+92     filterOptions[step.id] = unique(step.field, pool)
+                                       ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:94:9 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+
+94     if (filters[step.id] && !filterOptions[step.id].includes(filters[step.id])) {
+           ~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:94:17 - error TS18048: 'step' is possibly 'undefined'.
+
+94     if (filters[step.id] && !filterOptions[step.id].includes(filters[step.id])) {
+                   ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:94:30 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: never[]; province: never[]; amphur: never[]; tambol: never[]; system: never[]; operator: never[]; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: never[]; province: never[]; amphur: never[]; tambol: never[]; system: never[]; operator: never[]; }'.
+
+94     if (filters[step.id] && !filterOptions[step.id].includes(filters[step.id])) {
+                                ~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:94:44 - error TS18048: 'step' is possibly 'undefined'.
+
+94     if (filters[step.id] && !filterOptions[step.id].includes(filters[step.id])) {
+                                              ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:94:62 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+
+94     if (filters[step.id] && !filterOptions[step.id].includes(filters[step.id])) {
+                                                                ~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:94:70 - error TS18048: 'step' is possibly 'undefined'.
+
+94     if (filters[step.id] && !filterOptions[step.id].includes(filters[step.id])) {
+                                                                        ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:95:7 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+
+95       filters[step.id] = ''
+         ~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:95:15 - error TS18048: 'step' is possibly 'undefined'.
+
+95       filters[step.id] = ''
+                 ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:103:15 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+
+103     const v = filters[id]
+                  ~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:135:83 - error TS2339: Property '_idx' does not exist on type 'never'.
+
+135   if (show === 'fix') return allSiteData.value.filter(d => fixSiteSet.value.has(d._idx))
+                                                                                      ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:136:84 - error TS2339: Property '_idx' does not exist on type 'never'.
+
+136   if (show === 'ok')  return allSiteData.value.filter(d => !fixSiteSet.value.has(d._idx))
+                                                                                       ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:155:22 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(o: {}): string[]', gave the following error.
+    Argument of type 'undefined' is not assignable to parameter of type '{}'.
+  Overload 2 of 2, '(o: object): string[]', gave the following error.
+    Argument of type 'undefined' is not assignable to parameter of type 'object'.
+
+155   return Object.keys(allSiteData.value[0]).filter(k => k !== 'availability' && k !== '_idx')
+                         ~~~~~~~~~~~~~~~~~~~~
+
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:160:21 - error TS7006: Parameter 'page' implicitly has an 'any' type.
+
+160 function renderPage(page) {
+                        ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:164:21 - error TS7006: Parameter 'dir' implicitly has an 'any' type.
+
+164 function changePage(dir) {
+                        ~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:169:14 - error TS7006: Parameter 'arr' implicitly has an 'any' type.
+
+169 function avg(arr) {
+                 ~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:171:22 - error TS7006: Parameter 'a' implicitly has an 'any' type.
+
+171   return arr.reduce((a, b) => a + b, 0) / arr.length
+                         ~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:171:25 - error TS7006: Parameter 'b' implicitly has an 'any' type.
+
+171   return arr.reduce((a, b) => a + b, 0) / arr.length
+                            ~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:178:5 - error TS2698: Spread types may only be created from object types.
+
+178     ...d,
+        ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:203:3 - error TS2322: Type 'any[]' is not assignable to type 'never[]'.
+  Type 'any' is not assignable to type 'never'.
+
+203   allSiteData.value = data
+      ~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:220:3 - error TS2322: Type 'number | null' is not assignable to type 'null'.
+  Type 'number' is not assignable to type 'null'.
+
+220   stats.totalSites   = totalSites
+      ~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:224:3 - error TS2322: Type 'number | null' is not assignable to type 'null'.
+  Type 'number' is not assignable to type 'null'.
+
+224   stats.fixSites     = fixSites
+      ~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:237:21 - error TS7006: Parameter 'av' implicitly has an 'any' type.
+
+237 function availClass(av) {
+                        ~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:245:5 - error TS7034: Variable 'chartInstance' implicitly has type 'any' in some locations where its type cannot be determined.
+
+245 let chartInstance = null
+        ~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:247:20 - error TS7006: Parameter 'data' implicitly has an 'any' type.
+
+247 function drawChart(data, tgt) {
+                       ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:247:26 - error TS7006: Parameter 'tgt' implicitly has an 'any' type.
+
+247 function drawChart(data, tgt) {
+                             ~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:252:27 - error TS7006: Parameter 'd' implicitly has an 'any' type.
+
+252   const labels = data.map(d => d.site || d.SITE || '—')
+                              ~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:253:27 - error TS7006: Parameter 'd' implicitly has an 'any' type.
+
+253   const vals   = data.map(d => d.availability)
+                              ~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:254:27 - error TS7006: Parameter 'v' implicitly has an 'any' type.
+
+254   const colors = vals.map(v => v >= tgt ? '#30d98a' : v >= tgt - 0.1 ? '#f7b94f' : '#f75a5a')
+                              ~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:256:7 - error TS7005: Variable 'chartInstance' implicitly has an 'any' type.
+
+256   if (chartInstance) chartInstance.destroy()
+          ~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:258:30 - error TS2339: Property 'Chart' does not exist on type 'Window & typeof globalThis'.
+
+258   chartInstance = new window.Chart(chartCanvas.value, {
+                                 ~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:276:31 - error TS7006: Parameter 'ctx' implicitly has an 'any' type.
+
+276           callbacks: { label: ctx => ` ${ctx.parsed.y.toFixed(4)}%` },
+                                  ~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:290:87 - error TS7006: Parameter 'v' implicitly has an 'any' type.
+
+290           ticks: { color: textColor, font: { family: 'DM Mono', size: 11 }, callback: v => v.toFixed(2) + '%' },
+                                                                                          ~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:309:5 - error TS7034: Variable 'toastTimer' implicitly has type 'any' in some locations where its type cannot be determined.
+
+309 let toastTimer = null
+        ~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:311:20 - error TS7006: Parameter 'msg' implicitly has an 'any' type.
+
+311 function showToast(msg) {
+                       ~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:314:16 - error TS7005: Variable 'toastTimer' implicitly has an 'any' type.
+
+314   clearTimeout(toastTimer)
+                   ~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:386:30 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: string; province: string; amphur: string; tambol: string; system: string; operator: string; }'.
+
+386             <select v-model="filters[f.id]" @change="onFilterChange(f.id)">
+                                 ~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:388:37 - error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ region: never[]; province: never[]; amphur: never[]; tambol: never[]; system: never[]; operator: never[]; }'.
+  No index signature with a parameter of type 'string' was found on type '{ region: never[]; province: never[]; amphur: never[]; tambol: never[]; system: never[]; operator: never[]; }'.
+
+388               <option v-for="opt in filterOptions[f.id]" :key="opt" :value="opt">{{ opt }}</option>
+                                        ~~~~~~~~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:448:57 - error TS2339: Property '_idx' does not exist on type 'never'.
+
+448                 :class="{ 'row-fix': fixSiteSet.has(row._idx) }"
+                                                            ~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:450:63 - error TS2339: Property 'availability' does not exist on type 'never'.
+
+450                 <td class="avail-cell" :class="availClass(row.availability)">
+                                                                  ~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:451:32 - error TS2339: Property 'availability' does not exist on type 'never'.
+
+451                   {{ isNaN(row.availability) ? '—' : row.availability.toFixed(4) + '%' }}
+                                   ~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:451:58 - error TS2339: Property 'availability' does not exist on type 'never'.
+
+451                   {{ isNaN(row.availability) ? '—' : row.availability.toFixed(4) + '%' }}
+                                                             ~~~~~~~~~~~~
+
+src/views/NetworkAvailability/NetworkAvailabilityDashBoard.vue:454:50 - error TS2339: Property '_idx' does not exist on type 'never'.
+
+454                   <span v-if="fixSiteSet.has(row._idx)" class="fix-pill">NEED FIX</span>
+                                                     ~~~~
+
+src/views/NetworkAvailability/UploadIncidentTT.vue:398:31 - error TS6133: 'v' is declared but its value is never read.
+
+398                       v-for="(v, k) in result.preview[0]"
+                                  ~
+
+src/views/NetworkAvailability/UploadSiteAVA.vue:390:31 - error TS6133: 'v' is declared but its value is never read.
+
+390                       v-for="(v, k) in result.preview[0]"
+                                  ~
+
+src/views/NetworkAvailability/UploadTop100SiteAVA.vue:14:7 - error TS6133: 'missingSites' is declared but its value is never read.
+
+14 const missingSites = ref<any[] | null>(null);
+         ~~~~~~~~~~~~
+
+src/views/NetworkAvailability/UploadTop100SiteAVA.vue:395:31 - error TS6133: 'v' is declared but its value is never read.
+
+395                       v-for="(v, k) in result.preview[0]"
+                                  ~
+
+src/views/PM.vue:5:7 - error TS6133: 'themeStore' is declared but its value is never read.
+
+5 const themeStore = useThemeStore();
+        ~~~~~~~~~~
+
+src/views/PM.vue:9:7 - error TS6133: 'go' is declared but its value is never read.
+
+9 const go = (path: string) => {
+        ~~
+
+src/views/pm/pm_add_cabinet.vue:3:10 - error TS6133: 'useRoute' is declared but its value is never read.
+
+3 import { useRoute, useRouter } from "vue-router";
+           ~~~~~~~~
+
+src/views/pm/pm_add_cabinet.vue:5:1 - error TS6133: 'pmTitleManage' is declared but its value is never read.
+
+5 import { pmTitleManage } from "../../services/PmTitle/pmTitleManage.api";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/pm/pm_add_cabinet.vue:6:1 - error TS6133: 'PMApiService' is declared but its value is never read.
+
+6 import { PMApiService } from "../../services/pm_nodeb.api";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/pm/pm_add_cabinet.vue:11:7 - error TS6133: 'username' is declared but its value is never read.
+
+11 const username = authStore.currentUser;
+         ~~~~~~~~
+
+src/views/pm/pm_add_cabinet.vue:14:7 - error TS6133: 'isSubmitting' is declared but its value is never read.
+
+14 const isSubmitting = ref(false);
+         ~~~~~~~~~~~~
+
+src/views/pm/pm_add_cabinet.vue:15:7 - error TS6133: 'loading' is declared but its value is never read.
+
+15 const loading = ref(false);
+         ~~~~~~~
+
+src/views/pm/pm_cabinet_detail_page.vue:2:26 - error TS6133: 'onBeforeUnmount' is declared but its value is never read.
+
+2 import { ref, onMounted, onBeforeUnmount, computed } from "vue";
+                           ~~~~~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_detail_page.vue:4:1 - error TS6133: 'getPmList' is declared but its value is never read.
+
+4 import { getPmList } from "../../services/pm_nodeb_list.api";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_detail_page.vue:8:7 - error TS6133: 'route' is declared but its value is never read.
+
+8 const route = useRoute();
+        ~~~~~
+
+src/views/pm/pm_cabinet_detail_page.vue:18:7 - error TS6133: 'pMsiteData' is declared but its value is never read.
+
+18 const pMsiteData = ref<any>(null);
+         ~~~~~~~~~~
+
+src/views/pm/pm_cabinet_detail_page.vue:21:7 - error TS6133: 'hide' is declared but its value is never read.
+
+21 const hide = () => {
+         ~~~~
+
+src/views/pm/pm_cabinet_detail_page.vue:29:7 - error TS6133: 'userId' is declared but its value is never read.
+
+29 const userId = authStore.userId;
+         ~~~~~~
+
+src/views/pm/pm_cabinet_detail_page.vue:31:7 - error TS6133: 'isCheckedIn' is declared but its value is never read.
+
+31 const isCheckedIn = ref(false);
+         ~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_detail_page.vue:32:7 - error TS6133: 'checkInTime' is declared but its value is never read.
+
+32 const checkInTime = ref<string | null>(null);
+         ~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_detail_page.vue:33:7 - error TS6133: 'checkOutTime' is declared but its value is never read.
+
+33 const checkOutTime = ref<string | null>(null);
+         ~~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_detail_page.vue:59:7 - error TS6133: 'handleCabinetDetail' is declared but its value is never read.
+
+59 const handleCabinetDetail = (cabinets_id: any) => {
+         ~~~~~~~~~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:2:26 - error TS6133: 'onBeforeUnmount' is declared but its value is never read.
+
+2 import { ref, onMounted, onBeforeUnmount, computed } from "vue";
+                           ~~~~~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:8:7 - error TS6133: 'route' is declared but its value is never read.
+
+8 const route = useRoute();
+        ~~~~~
+
+src/views/pm/pm_cabinet_page.vue:49:7 - error TS6133: 'userId' is declared but its value is never read.
+
+49 const userId = authStore.userId;
+         ~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:52:7 - error TS6133: 'checkInTime' is declared but its value is never read.
+
+52 const checkInTime = ref<string | null>(null);
+         ~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:53:7 - error TS6133: 'checkOutTime' is declared but its value is never read.
+
+53 const checkOutTime = ref<string | null>(null);
+         ~~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:414:32 - error TS2339: Property 'cabinet_name' does not exist on type 'never'.
+
+414                         {{ cab.cabinet_name || `Cabinet ${index + 1}` }}
+                                   ~~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:433:33 - error TS2339: Property 'cabinet_network' does not exist on type 'never'.
+
+433                             cab.cabinet_network || "N/A"
+                                    ~~~~~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:440:56 - error TS2339: Property 'id' does not exist on type 'never'.
+
+440                   <div @click="handleCabinetDetail(cab.id)">
+                                                           ~~
+
+src/views/pm/pm_cabinet_page.vue:456:50 - error TS2339: Property 'id' does not exist on type 'never'.
+
+456                   <div @click="handleCabinet(cab.id)">
+                                                     ~~
+
+src/views/pm/pm_cabinet_page.vue:480:56 - error TS2339: Property 'id' does not exist on type 'never'.
+
+480                   <div @click="handleCabinetDelete(cab.id)">
+                                                           ~~
+
+src/views/pm/pm_cabinet_page.vue:542:29 - error TS2339: Property 'rectifier_count' does not exist on type 'never'.
+
+542                         cab.rectifier_count
+                                ~~~~~~~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:567:29 - error TS2339: Property 'batteries' does not exist on type 'never'.
+
+567                         cab.batteries?.length || 0
+                                ~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:571:33 - error TS2339: Property 'batteries' does not exist on type 'never'.
+
+571                       v-if="cab.batteries[0]?.battery_type"
+                                    ~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:574:30 - error TS2339: Property 'batteries' does not exist on type 'never'.
+
+574                       {{ cab.batteries[0].battery_type }}
+                                 ~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:597:29 - error TS2339: Property 'site_grad' does not exist on type 'never'.
+
+597                         cab.site_grad || "N/A"
+                                ~~~~~~~~~
+
+src/views/pm/pm_cabinet_page.vue:622:29 - error TS2339: Property 'problems' does not exist on type 'never'.
+
+622                         cab.problems?.length || 0
+                                ~~~~~~~~
+
+src/views/pm/pm_enter_data.vue:3:10 - error TS6133: 'useRoute' is declared but its value is never read.
+
+3 import { useRoute, useRouter } from "vue-router";
+           ~~~~~~~~
+
+src/views/pm/pm_enter_data.vue:4:1 - error TS6133: 'pmServiceManage' is declared but its value is never read.
+
+4 import { pmServiceManage } from "../../services/pmServiceManage.api";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/pm/pm_enter_data.vue:89:52 - error TS2339: Property 'pm_images' does not exist on type 'any[]'.
+
+89     pm_images.value = title_child_value_list.value.pm_images;
+                                                      ~~~~~~~~~
+
+src/views/pm/pm_enter_data.vue:154:33 - error TS2769: No overload matches this call.
+  Overload 1 of 3, '(name: string, value: string | Blob): void', gave the following error.
+    Argument of type 'number' is not assignable to parameter of type 'string | Blob'.
+  Overload 2 of 3, '(name: string, value: string): void', gave the following error.
+    Argument of type 'number' is not assignable to parameter of type 'string'.
+  Overload 3 of 3, '(name: string, blobValue: Blob, filename?: string | undefined): void', gave the following error.
+    Argument of type 'number' is not assignable to parameter of type 'Blob'.
+
+154     form.append("order_number", send_order_number.value);
+                                    ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+src/views/pm/pm_enter_data.vue:156:29 - error TS18047: 'username' is possibly 'null'.
+
+156     form.append("username", username.username);
+                                ~~~~~~~~
+
+src/views/pm/pm_nodeb_new.vue:2:10 - error TS6133: 'onMounted' is declared but its value is never read.
+
+2 import { onMounted, ref, watch, computed } from "vue";
+           ~~~~~~~~~
+
+src/views/pm/pm_nodeb_new.vue:67:33 - error TS18046: 'error' is of type 'unknown'.
+
+67     alert("เกิดข้อผิดพลาด: " + (error.message || "ไม่สามารถลงข้อมูลได้"));
+                                   ~~~~~
+
+src/views/pm/pm_nodeb_new.vue:78:20 - error TS18047: 'username' is possibly 'null'.
+
+78 const created_by = username.username;
+                      ~~~~~~~~
+
+src/views/pm/pm_nodeb_new_V1.vue:30:8 - error TS2307: Cannot find module '../../services/pmConfig.api' or its corresponding type declarations.
+
+30 } from "../../services/pmConfig.api";
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/pm/pm_nodeb_new_V1.vue:310:41 - error TS2339: Property 'pm_nodeb' does not exist on type '{ pre_pm_nodeb(data: any): Promise<any>; PmsubmitData(data: any): Promise<any>; }'.
+
+310     const pmResult = await PMApiService.pm_nodeb(
+                                            ~~~~~~~~
+
+src/views/pm/pm_nodeb_new_V1.vue:331:24 - error TS2339: Property 'pm_site_information' does not exist on type '{ pre_pm_nodeb(data: any): Promise<any>; PmsubmitData(data: any): Promise<any>; }'.
+
+331     await PMApiService.pm_site_information(pm_id, siteInfoData);
+                           ~~~~~~~~~~~~~~~~~~~
+
+src/views/pm/pm_nodeb_new_V1.vue:412:49 - error TS18046: 'error' is of type 'unknown'.
+
+412     alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " + error.message);
+                                                    ~~~~~
+
+src/views/pm/pm_site_detail.vue:9:7 - error TS6133: 'route' is declared but its value is never read.
+
+9 const route = useRoute();
+        ~~~~~
+
+src/views/pm/pm_site_detail.vue:495:28 - error TS2339: Property 'activeTab' does not exist on type '{ loading: boolean; pMsiteData: any; goBack: () => void; goEdit: () => Promise<void | NavigationFailure | undefined>; userRole: string | undefined; handleDelete: () => Promise<...>; ... 36 more ...; $router: Router; }'.
+
+495               nav.name === activeTab
+                               ~~~~~~~~~
+
+src/views/pm/pm_site_detail.vue:1098:32 - error TS2339: Property 'cabinet_name' does not exist on type 'never'.
+
+1098                         {{ cab.cabinet_name || `Cabinet ${index + 1}` }}
+                                    ~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail.vue:1117:33 - error TS2339: Property 'cabinet_network' does not exist on type 'never'.
+
+1117                             cab.cabinet_network || "N/A"
+                                     ~~~~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail.vue:1124:50 - error TS2339: Property 'id' does not exist on type 'never'.
+
+1124                   <div @click="handleCabinet(cab.id)">
+                                                      ~~
+
+src/views/pm/pm_site_detail.vue:1147:56 - error TS2339: Property 'id' does not exist on type 'never'.
+
+1147                   <div @click="handleCabinetDelete(cab.id)">
+                                                            ~~
+
+src/views/pm/pm_site_detail.vue:1211:29 - error TS2339: Property 'rectifier_count' does not exist on type 'never'.
+
+1211                         cab.rectifier_count
+                                 ~~~~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail.vue:1238:29 - error TS2339: Property 'batteries' does not exist on type 'never'.
+
+1238                         cab.batteries?.length || 0
+                                 ~~~~~~~~~
+
+src/views/pm/pm_site_detail.vue:1242:33 - error TS2339: Property 'batteries' does not exist on type 'never'.
+
+1242                       v-if="cab.batteries[0]?.battery_type"
+                                     ~~~~~~~~~
+
+src/views/pm/pm_site_detail.vue:1245:30 - error TS2339: Property 'batteries' does not exist on type 'never'.
+
+1245                       {{ cab.batteries[0].battery_type }}
+                                  ~~~~~~~~~
+
+src/views/pm/pm_site_detail.vue:1268:29 - error TS2339: Property 'site_grad' does not exist on type 'never'.
+
+1268                         cab.site_grad || "N/A"
+                                 ~~~~~~~~~
+
+src/views/pm/pm_site_detail.vue:1295:29 - error TS2339: Property 'problems' does not exist on type 'never'.
+
+1295                         cab.problems?.length || 0
+                                 ~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data.vue:2:26 - error TS6133: 'onBeforeUnmount' is declared but its value is never read.
+
+2 import { ref, onMounted, onBeforeUnmount, compile, computed } from "vue";
+                           ~~~~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data.vue:2:43 - error TS6133: 'compile' is declared but its value is never read.
+
+2 import { ref, onMounted, onBeforeUnmount, compile, computed } from "vue";
+                                            ~~~~~~~
+
+src/views/pm/pm_site_detail_site_data.vue:10:7 - error TS6133: 'route' is declared but its value is never read.
+
+10 const route = useRoute();
+         ~~~~~
+
+src/views/pm/pm_site_detail_site_data.vue:25:7 - error TS6133: 'hide' is declared but its value is never read.
+
+25 const hide = () => {
+         ~~~~
+
+src/views/pm/pm_site_detail_site_data.vue:63:7 - error TS6133: 'handleCheckInOut' is declared but its value is never read.
+
+63 const handleCheckInOut = async () => {
+         ~~~~~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data.vue:499:34 - error TS2339: Property 'find' does not exist on type 'string'.
+
+499                       title_info.find((item) => item.key === section.key)
+                                     ~~~~
+
+src/views/pm/pm_site_detail_site_data.vue:499:40 - error TS7006: Parameter 'item' implicitly has an 'any' type.
+
+499                       title_info.find((item) => item.key === section.key)
+                                           ~~~~
+
+src/views/pm/pm_site_detail_site_data.vue:504:34 - error TS2339: Property 'find' does not exist on type 'string'.
+
+504                       title_info.find((item) => item.key === section.key)
+                                     ~~~~
+
+src/views/pm/pm_site_detail_site_data.vue:504:40 - error TS7006: Parameter 'item' implicitly has an 'any' type.
+
+504                       title_info.find((item) => item.key === section.key)
+                                           ~~~~
+
+src/views/pm/pm_site_detail_site_data_data.vue:2:26 - error TS6133: 'onBeforeUnmount' is declared but its value is never read.
+
+2 import { ref, onMounted, onBeforeUnmount, computed } from "vue";
+                           ~~~~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data_data.vue:11:7 - error TS6133: 'authStore' is declared but its value is never read.
+
+11 const authStore = useAuthStore();
+         ~~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data_data.vue:28:7 - error TS6133: 'hide' is declared but its value is never read.
+
+28 const hide = () => {
+         ~~~~
+
+src/views/pm/pm_site_detail_site_data_data.vue:36:7 - error TS6133: 'goEdit' is declared but its value is never read.
+
+36 const goEdit = () => {
+         ~~~~~~
+
+src/views/pm/pm_site_detail_site_data_data.vue:40:7 - error TS6133: 'handleDelete' is declared but its value is never read.
+
+40 const handleDelete = async () => {
+         ~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data_data.vue:56:25 - error TS7006: Parameter 'titleDetails' implicitly has an 'any' type.
+
+56 const getDetailStats = (titleDetails, baseActiveSlots, orderNumber) => {
+                           ~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data_data.vue:56:39 - error TS7006: Parameter 'baseActiveSlots' implicitly has an 'any' type.
+
+56 const getDetailStats = (titleDetails, baseActiveSlots, orderNumber) => {
+                                         ~~~~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data_data.vue:56:56 - error TS7006: Parameter 'orderNumber' implicitly has an 'any' type.
+
+56 const getDetailStats = (titleDetails, baseActiveSlots, orderNumber) => {
+                                                          ~~~~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data_data.vue:58:38 - error TS7006: Parameter 'd' implicitly has an 'any' type.
+
+58   const detail = titleDetails?.find((d) => d.order_number === orderNumber);
+                                        ~
+
+src/views/pm/pm_site_detail_site_data_enter_data.vue:332:63 - error TS2365: Operator '+' cannot be applied to types 'string | number' and 'number'.
+
+332                             :alt="img.description || `Image ${imgIndex + 1}`"
+                                                                  ~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data_enter_data.vue:355:40 - error TS2365: Operator '+' cannot be applied to types 'string | number' and 'number'.
+
+355                               Image {{ imgIndex + 1 }}
+                                           ~~~~~~~~~~~~
+
+src/views/pm/pm_site_detail_site_data_enter_data.vue:365:29 - error TS2365: Operator '+' cannot be applied to types 'string | number' and 'number'.
+
+365                             imgIndex + 1
+                                ~~~~~~~~~~~~
+
+src/views/pm/title/pm_dropdown.vue:2:26 - error TS6133: 'computed' is declared but its value is never read.
+
+2 import { ref, onMounted, computed } from "vue";
+                           ~~~~~~~~
+
+src/views/pm/title/pm_dropdown.vue:123:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+123               :key="item.id"
+                             ~~
+
+src/views/pm/title/pm_dropdown.vue:128:50 - error TS2339: Property 'id' does not exist on type 'never'.
+
+128                 @click="goPMDropdown_Member(item.id)"
+                                                     ~~
+
+src/views/pm/title/pm_dropdown.vue:130:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+130                 [{{ item.id }}] {{ item.dropdown_head }}
+                             ~~
+
+src/views/pm/title/pm_dropdown.vue:130:41 - error TS2339: Property 'dropdown_head' does not exist on type 'never'.
+
+130                 [{{ item.id }}] {{ item.dropdown_head }}
+                                            ~~~~~~~~~~~~~
+
+src/views/pm/title/pm_dropdown.vue:135:24 - error TS2339: Property 'duplicate_count' does not exist on type 'never'.
+
+135                 {{item.duplicate_count}}
+                           ~~~~~~~~~~~~~~~
+
+src/views/pm/title/pm_dropdown.vue:145:47 - error TS2339: Property 'id' does not exist on type 'never'.
+
+145                     @click="handleDelete(item.id)"
+                                                  ~~
+
+src/views/pm/title/pm_dropdown_add.vue:7:7 - error TS6133: 'route' is declared but its value is never read.
+
+7 const route = useRoute();
+        ~~~~~
+
+src/views/pm/title/pm_dropdown_member.vue:2:26 - error TS6133: 'computed' is declared but its value is never read.
+
+2 import { ref, onMounted, computed } from "vue";
+                           ~~~~~~~~
+
+src/views/pm/title/pm_dropdown_member.vue:116:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+116               :key="item.id"
+                             ~~
+
+src/views/pm/title/pm_dropdown_member.vue:121:25 - error TS2551: Property 'goPMDropdown' does not exist on type '{ goNew: (id: any) => Promise<void | NavigationFailure | undefined>; Id: string; loading: boolean; pmDropDown: never[]; handleDelete: (id: number) => Promise<void>; ... 18 more ...; $router: Router; }'. Did you mean 'pmDropDown'?
+
+121                 @click="goPMDropdown(item.id)"
+                            ~~~~~~~~~~~~
+
+src/views/pm/title/pm_dropdown_member.vue:121:43 - error TS2339: Property 'id' does not exist on type 'never'.
+
+121                 @click="goPMDropdown(item.id)"
+                                              ~~
+
+src/views/pm/title/pm_dropdown_member.vue:123:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+123                 [{{ item.id }}] {{ item.dropdown_member }}
+                             ~~
+
+src/views/pm/title/pm_dropdown_member.vue:123:41 - error TS2339: Property 'dropdown_member' does not exist on type 'never'.
+
+123                 [{{ item.id }}] {{ item.dropdown_member }}
+                                            ~~~~~~~~~~~~~~~
+
+src/views/pm/title/pm_dropdown_member.vue:133:47 - error TS2339: Property 'id' does not exist on type 'never'.
+
+133                     @click="handleDelete(item.id)"
+                                                  ~~
+
+src/views/pm/title/pm_title.vue:2:26 - error TS6133: 'computed' is declared but its value is never read.
+
+2 import { ref, onMounted, computed, watch } from "vue";
+                           ~~~~~~~~
+
+src/views/pm/title/pm_title.vue:28:13 - error TS2532: Object is possibly 'undefined'.
+
+28         id: pmTitles.value[i].id,
+               ~~~~~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title.vue:31:7 - error TS2532: Object is possibly 'undefined'.
+
+31       pmTitles.value[i].title_child_count =
+         ~~~~~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title.vue:205:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+205               :key="item.id"
+                             ~~
+
+src/views/pm/title/pm_title.vue:209:25 - error TS2339: Property 'rank' does not exist on type 'never'.
+
+209                 {{ item.rank }}
+                            ~~~~
+
+src/views/pm/title/pm_title.vue:213:43 - error TS2339: Property 'id' does not exist on type 'never'.
+
+213                 @click="goTitleChild(item.id)"
+                                              ~~
+
+src/views/pm/title/pm_title.vue:215:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+215                 [{{ item.id }}] {{ item.title }}
+                             ~~
+
+src/views/pm/title/pm_title.vue:215:41 - error TS2339: Property 'title' does not exist on type 'never'.
+
+215                 [{{ item.id }}] {{ item.title }}
+                                            ~~~~~
+
+src/views/pm/title/pm_title.vue:218:25 - error TS2339: Property 'key' does not exist on type 'never'.
+
+218                 {{ item.key || "-" }}
+                            ~~~
+
+src/views/pm/title/pm_title.vue:221:25 - error TS2339: Property 'type' does not exist on type 'never'.
+
+221                 {{ item.type }}
+                            ~~~~
+
+src/views/pm/title/pm_title.vue:224:25 - error TS2339: Property 'title_child_count' does not exist on type 'never'.
+
+224                 {{ item.title_child_count || "0" }}
+                            ~~~~~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title.vue:230:26 - error TS2339: Property 'status' does not exist on type 'never'.
+
+230                     item.status === 'active'
+                             ~~~~~~
+
+src/views/pm/title/pm_title.vue:235:27 - error TS2339: Property 'status' does not exist on type 'never'.
+
+235                   {{ item.status === "active" ? "Active" : "Inactive" }}
+                              ~~~~~~
+
+src/views/pm/title/pm_title.vue:241:64 - error TS2339: Property 'id' does not exist on type 'never'.
+
+241                     @click="router.push(`/pm_title_edit/${item.id}`)"
+                                                                   ~~
+
+src/views/pm/title/pm_title.vue:247:47 - error TS2339: Property 'id' does not exist on type 'never'.
+
+247                     @click="handleDelete(item.id)"
+                                                  ~~
+
+src/views/pm/title/pm_title_add.vue:2:15 - error TS6133: 'onMounted' is declared but its value is never read.
+
+2 import { ref, onMounted, computed } from "vue";
+                ~~~~~~~~~
+
+src/views/pm/title/pm_title_add.vue:2:26 - error TS6133: 'computed' is declared but its value is never read.
+
+2 import { ref, onMounted, computed } from "vue";
+                           ~~~~~~~~
+
+src/views/pm/title/pm_title_child.vue:2:26 - error TS6133: 'computed' is declared but its value is never read.
+
+2 import { ref, onMounted, computed } from "vue";
+                           ~~~~~~~~
+
+src/views/pm/title/pm_title_child.vue:89:23 - error TS2339: Property 'title' does not exist on type 'never[]'.
+
+89           {{ pmTitles.title }}
+                         ~~~~~
+
+src/views/pm/title/pm_title_child.vue:93:34 - error TS2339: Property 'id' does not exist on type 'never[]'.
+
+93           @click="goNew(pmTitles.id)"
+                                    ~~
+
+src/views/pm/title/pm_title_child.vue:102:21 - error TS2339: Property 'description' does not exist on type 'never[]'.
+
+102         {{ pmTitles.description }}
+                        ~~~~~~~~~~~
+
+src/views/pm/title/pm_title_child.vue:110:23 - error TS2339: Property 'pm_type' does not exist on type 'never[]'.
+
+110           {{ pmTitles.pm_type }}
+                          ~~~~~~~
+
+src/views/pm/title/pm_title_child.vue:199:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+199               :key="item.id"
+                             ~~
+
+src/views/pm/title/pm_title_child.vue:203:25 - error TS2339: Property 'rank' does not exist on type 'never'.
+
+203                 {{ item.rank }}
+                            ~~~~
+
+src/views/pm/title/pm_title_child.vue:206:26 - error TS2339: Property 'id' does not exist on type 'never'.
+
+206                 [{{ item.id }}] {{ item.title_child_name }}
+                             ~~
+
+src/views/pm/title/pm_title_child.vue:206:41 - error TS2339: Property 'title_child_name' does not exist on type 'never'.
+
+206                 [{{ item.id }}] {{ item.title_child_name }}
+                                            ~~~~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title_child.vue:209:25 - error TS2339: Property 'pm_type' does not exist on type 'never'.
+
+209                 {{ item.pm_type || "-" }}
+                            ~~~~~~~
+
+src/views/pm/title/pm_title_child.vue:212:25 - error TS2339: Property 'sub_type' does not exist on type 'never'.
+
+212                 {{ item.sub_type || "-" }}
+                            ~~~~~~~~
+
+src/views/pm/title/pm_title_child.vue:215:25 - error TS2339: Property 'pm_detail_count' does not exist on type 'never'.
+
+215                 {{ item.pm_detail_count || "-" }}
+                            ~~~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title_child.vue:221:26 - error TS2339: Property 'status' does not exist on type 'never'.
+
+221                     item.status === 'active'
+                             ~~~~~~
+
+src/views/pm/title/pm_title_child.vue:226:27 - error TS2339: Property 'status' does not exist on type 'never'.
+
+226                   {{ item.status === "active" ? "Active" : "Inactive" }}
+                              ~~~~~~
+
+src/views/pm/title/pm_title_child.vue:232:45 - error TS2339: Property 'id' does not exist on type 'never[]'.
+
+232                     @click="goEdit(pmTitles.id, item.id)"
+                                                ~~
+
+src/views/pm/title/pm_title_child.vue:232:54 - error TS2339: Property 'id' does not exist on type 'never'.
+
+232                     @click="goEdit(pmTitles.id, item.id)"
+                                                         ~~
+
+src/views/pm/title/pm_title_child.vue:238:47 - error TS2339: Property 'id' does not exist on type 'never'.
+
+238                     @click="handleDelete(item.id)"
+                                                  ~~
+
+src/views/pm/title/pm_title_child_add.vue:2:26 - error TS6133: 'computed' is declared but its value is never read.
+
+2 import { ref, onMounted, computed, watch } from "vue";
+                           ~~~~~~~~
+
+src/views/pm/title/pm_title_child_add.vue:52:55 - error TS2339: Property 'id' does not exist on type 'never'.
+
+52   const head = dropdownData.value.find((item) => item.id === headId);
+                                                         ~~
+
+src/views/pm/title/pm_title_child_add.vue:53:22 - error TS2339: Property 'members' does not exist on type 'never'.
+
+53   return head ? head.members : [];
+                        ~~~~~~~
+
+src/views/pm/title/pm_title_child_add.vue:462:32 - error TS2339: Property 'id' does not exist on type 'never'.
+
+462                     :key="head.id"
+                                   ~~
+
+src/views/pm/title/pm_title_child_add.vue:463:34 - error TS2339: Property 'id' does not exist on type 'never'.
+
+463                     :value="head.id"
+                                     ~~
+
+src/views/pm/title/pm_title_child_add.vue:466:29 - error TS2339: Property 'dropdown_head' does not exist on type 'never'.
+
+466                     {{ head.dropdown_head }}
+                                ~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title_child_add.vue:661:32 - error TS2339: Property 'id' does not exist on type 'never'.
+
+661                     :key="head.id"
+                                   ~~
+
+src/views/pm/title/pm_title_child_add.vue:662:34 - error TS2339: Property 'id' does not exist on type 'never'.
+
+662                     :value="head.id"
+                                     ~~
+
+src/views/pm/title/pm_title_child_add.vue:665:29 - error TS2339: Property 'dropdown_head' does not exist on type 'never'.
+
+665                     {{ head.dropdown_head }}
+                                ~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title_child_add.vue:859:32 - error TS2339: Property 'id' does not exist on type 'never'.
+
+859                     :key="head.id"
+                                   ~~
+
+src/views/pm/title/pm_title_child_add.vue:860:34 - error TS2339: Property 'id' does not exist on type 'never'.
+
+860                     :value="head.id"
+                                     ~~
+
+src/views/pm/title/pm_title_child_add.vue:863:29 - error TS2339: Property 'dropdown_head' does not exist on type 'never'.
+
+863                     {{ head.dropdown_head }}
+                                ~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title_child_add.vue:977:25 - error TS6133: 'desc' is declared but its value is never read.
+
+977                 v-for="(desc, index) in image_descriptions"
+                            ~~~~
+
+src/views/pm/title/pm_title_child_edit.vue:8:7 - error TS6133: 'route' is declared but its value is never read.
+
+8 const route = useRoute();
+        ~~~~~
+
+src/views/pm/title/pm_title_child_edit.vue:50:30 - error TS6133: 'oldVal' is declared but its value is never read.
+
+50 watch(image_number, (newVal, oldVal) => {
+                                ~~~~~~
+
+src/views/pm/title/pm_title_child_edit.vue:65:55 - error TS2339: Property 'id' does not exist on type 'never'.
+
+65   const head = dropdownData.value.find((item) => item.id === headId);
+                                                         ~~
+
+src/views/pm/title/pm_title_child_edit.vue:66:22 - error TS2339: Property 'members' does not exist on type 'never'.
+
+66   return head ? head.members : [];
+                        ~~~~~~~
+
+src/views/pm/title/pm_title_child_edit.vue:524:32 - error TS2339: Property 'id' does not exist on type 'never'.
+
+524                     :key="head.id"
+                                   ~~
+
+src/views/pm/title/pm_title_child_edit.vue:525:34 - error TS2339: Property 'id' does not exist on type 'never'.
+
+525                     :value="head.id"
+                                     ~~
+
+src/views/pm/title/pm_title_child_edit.vue:528:29 - error TS2339: Property 'dropdown_head' does not exist on type 'never'.
+
+528                     {{ head.dropdown_head }}
+                                ~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title_child_edit.vue:724:32 - error TS2339: Property 'id' does not exist on type 'never'.
+
+724                     :key="head.id"
+                                   ~~
+
+src/views/pm/title/pm_title_child_edit.vue:725:34 - error TS2339: Property 'id' does not exist on type 'never'.
+
+725                     :value="head.id"
+                                     ~~
+
+src/views/pm/title/pm_title_child_edit.vue:728:29 - error TS2339: Property 'dropdown_head' does not exist on type 'never'.
+
+728                     {{ head.dropdown_head }}
+                                ~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title_child_edit.vue:924:32 - error TS2339: Property 'id' does not exist on type 'never'.
+
+924                     :key="head.id"
+                                   ~~
+
+src/views/pm/title/pm_title_child_edit.vue:925:34 - error TS2339: Property 'id' does not exist on type 'never'.
+
+925                     :value="head.id"
+                                     ~~
+
+src/views/pm/title/pm_title_child_edit.vue:928:29 - error TS2339: Property 'dropdown_head' does not exist on type 'never'.
+
+928                     {{ head.dropdown_head }}
+                                ~~~~~~~~~~~~~
+
+src/views/pm/title/pm_title_child_edit.vue:1042:25 - error TS6133: 'desc' is declared but its value is never read.
+
+1042                 v-for="(desc, index) in image_descriptions"
+                             ~~~~
+
+src/views/pm/title/pm_title_edit.vue:2:26 - error TS6133: 'computed' is declared but its value is never read.
+
+2 import { ref, onMounted, computed } from "vue";
+                           ~~~~~~~~
+
+src/views/pm/title/pm_title_edit.vue:42:7 - error TS6133: 'pmTitles' is declared but its value is never read.
+
+42 const pmTitles = ref([]);
+         ~~~~~~~~
+
+src/views/pmDashBoard/pmDashBoardAI.vue:15:54 - error TS2339: Property 'isDragging' does not exist on type 'ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any>'.
+
+15         <div class="upload-zone" :class="{ dragging: isDragging }" @dragover.prevent="isDragging = true"
+                                                        ~~~~~~~~~~
+
+src/views/pmDashBoard/pmDashBoardAI.vue:15:87 - error TS2339: Property 'isDragging' does not exist on type 'ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any>'.
+
+15         <div class="upload-zone" :class="{ dragging: isDragging }" @dragover.prevent="isDragging = true"
+                                                                                         ~~~~~~~~~~
+
+src/views/pmDashBoard/pmDashBoardAI.vue:16:25 - error TS2339: Property 'isDragging' does not exist on type 'ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any>'.
+
+16             @dragleave="isDragging = false" @drop.prevent="onDrop">
+                           ~~~~~~~~~~
+
+src/views/pmDashBoard/pmDashBoardAI.vue:16:60 - error TS2339: Property 'onDrop' does not exist on type 'ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any>'.
+
+16             @dragleave="isDragging = false" @drop.prevent="onDrop">
+                                                              ~~~~~~
+
+src/views/pmDashBoard/pmDashBoardAI.vue:17:66 - error TS2339: Property 'onFileChange' does not exist on type 'ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any>'.
+
+17             <input type="file" accept=".xlsx,.xls,.csv" @change="onFileChange" />
+                                                                    ~~~~~~~~~~~~
+
+src/views/pmDashBoard/pmDashBoardAI.vue:21:24 - error TS2339: Property 'fileName' does not exist on type 'ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any>'.
+
+21             <div v-if="fileName" class="file-name">📄 {{ fileName }}</div>
+                          ~~~~~~~~
+
+src/views/pmDashBoard/pmDashBoardAI.vue:21:58 - error TS2339: Property 'fileName' does not exist on type 'ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any>'.
+
+21             <div v-if="fileName" class="file-name">📄 {{ fileName }}</div>
+                                                            ~~~~~~~~
+
+src/views/register.vue:9:7 - error TS6133: 'authStore' is declared but its value is never read.
+
+9 const authStore = useAuthStore();
+        ~~~~~~~~~
+
+src/views/Sites/sitesLocationView.vue:17:7 - error TS6133: 'initMap' is declared but its value is never read.
+
+17 const initMap = () => {
+         ~~~~~~~
+
+src/views/Sites/sitesLocationView.vue:26:18 - error TS2304: Cannot find name 'loadCable'.
+
+26   map.on("load", loadCable);
+                    ~~~~~~~~~
+
+src/views/txt_to_excel/home.vue:3:1 - error TS6133: 'v' is declared but its value is never read.
+
+3 import { v } from "vue-router/dist/router-CWoNjPRp.mjs";
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+src/views/txt_to_excel/home.vue:18:5 - error TS2322: Type 'File | undefined' is not assignable to type 'File | { readonly lastModified: number; readonly name: string; readonly webkitRelativePath: string; readonly size: number; readonly type: string; arrayBuffer: () => Promise<ArrayBuffer>; bytes: () => Promise<...>; slice: (start?: number | undefined, end?: number | undefined, contentType?: string | undefined) => Blob...'.
+  Type 'undefined' is not assignable to type 'File | { readonly lastModified: number; readonly name: string; readonly webkitRelativePath: string; readonly size: number; readonly type: string; arrayBuffer: () => Promise<ArrayBuffer>; bytes: () => Promise<...>; slice: (start?: number | undefined, end?: number | undefined, contentType?: string | undefined) => Blob...'.
+
+18     selectedFile.value = target.files[0];
+       ~~~~~~~~~~~~~~~~~~
+
+
+Found 378 errors.

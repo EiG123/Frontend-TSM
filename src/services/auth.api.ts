@@ -7,8 +7,10 @@ export const AuthApiService = {
         email,
         password: pass
       });
-      console.log(response.data);
-      // เก็บ token และ user data
+
+      console.log("📥 Login Response:", response.data);
+
+      // ✅ 1. ปรับชื่อคีย์ให้ตรงกับ Axios Interceptor ตัวที่เราใช้ดึงค่า
       if (response.data.success && response.data.token) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -16,21 +18,25 @@ export const AuthApiService = {
 
       return response.data;
     } catch (error: any) {
-      // จัดการ error ให้ดีขึ้น
+      // จัดการ error ให้สมบูรณ์แบบ
       if (error.response) {
+        // เคสที่หลังบ้าน (Hono) จงใจส่ง Error กลับมา เช่น รหัสผิด (401) หรือข้อมูลไม่ครบ (400)
         throw {
           success: false,
           message: error.response.data.message || 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ'
         };
       } else if (error.request) {
+        // เคสที่ Render ล่ม, เน็ตหลุด หรือสัญญานไปไม่ถึงหลังบ้าน
         throw {
           success: false,
-          message: error?.message || 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้'
+          // ✅ 2. เปลี่ยนให้แสดงภาษาไทยเป็นหลัก แล้วพ่วง Error ภาษาอังกฤษไว้ท้ายสุดเพื่อเอาไว้ส่องดูบั๊ก
+          message: `ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ (${error.message || 'Network Error'})`
         };
       } else {
+        // เคสผิดพลาดอื่น ๆ ในระบบฝั่งหน้าบ้านเอง
         throw {
           success: false,
-          message: 'เกิดข้อผิดพลาด'
+          message: error.message || 'เกิดข้อผิดพลาดภายในระบบหน้าบ้าน'
         };
       }
     }

@@ -63,7 +63,7 @@ export const AuthApiService = {
       } else if (error.request) {
         throw {
           success: false,
-          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้'
+          message: error?.message || 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้'
         };
       } else {
         throw {

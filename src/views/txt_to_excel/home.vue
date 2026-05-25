@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { v } from "vue-router/dist/router-CWoNjPRp.mjs";
 import { txt_to_excelManage } from "../../services/TxtToExcel/txt_to_excelManage.api";
 import { onUnmounted } from "vue";
 

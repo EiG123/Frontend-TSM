@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "../api.api";
 
 export const pmTitleManage = {
     async AddpmTitle(
@@ -9,8 +9,8 @@ export const pmTitleManage = {
         pm_status: string,
         pm_rank: number
     ) {
-        const response = await axios.post(
-            "http://localhost:3000/api/pmTitle/AddPmTitle", {
+        const response = await api.post(
+            "/pmTitle/AddPmTitle", {
             pm_name,
             pm_description,
             pm_key,
@@ -25,8 +25,8 @@ export const pmTitleManage = {
     async EditpmTitle(
         data: any
     ) {
-        const response = await axios.post(
-            "http://localhost:3000/api/pmTitle/EditpmTitle", {
+        const response = await api.post(
+            "/pmTitle/EditpmTitle", {
             ...data
         }
         );
@@ -34,74 +34,74 @@ export const pmTitleManage = {
     },
 
     async getAllPmTitle(data: any) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/getAllPmTitle", { data });
+        const response = await api.post("/pmTitle/getAllPmTitle", { data });
         return response.data;
     },
 
     async getPmTitleById(id: string) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/getPmTitleById", { id });
+        const response = await api.post("/pmTitle/getPmTitleById", { id });
         return response.data;
     },
 
     async getAllPmTitleChild(data: any) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/getAllPmTitleChild", { data });
+        const response = await api.post("/pmTitle/getAllPmTitleChild", { data });
         return response.data;
     },
 
     async AddpmTitleChild(data: any) {
-        const response = await axios.post(
-            "http://localhost:3000/api/pmTitle/AddPmTitleChild",
+        const response = await api.post(
+            "/pmTitle/AddPmTitleChild",
             { data }
         );
         return response.data;
     },
 
     async deleteTitleChildById(id: number) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/deleteTitleChildById", { id });
+        const response = await api.post("/pmTitle/deleteTitleChildById", { id });
         return response.data;
     },
     async deleteTitleById(id: number) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/deleteTitleById", { id });
+        const response = await api.post("/pmTitle/deleteTitleById", { id });
         return response.data;
     },
 
     async getTitleByType(data: any) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/getTitleByType", data);
+        const response = await api.post("/pmTitle/getTitleByType", data);
         return response.data;
     },
 
     async getTitleChildByTitle(data: any) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/getTitleChildByTitle", { ...data });
+        const response = await api.post("/pmTitle/getTitleChildByTitle", { ...data });
         return response.data;
     },
 
     async getTitleChildDataByTitle(data: any) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/getTitleChildDataByTitle", { ...data });
+        const response = await api.post("/pmTitle/getTitleChildDataByTitle", { ...data });
         return response.data;
     },
 
     // async getTitleChildValueByTitle(data: any) {
-    //     const response = await axios.post("http://localhost:3000/api/pmTitle/getTitleChildValueByTitle", { ...data });
+    //     const response = await api.post("/pmTitle/getTitleChildValueByTitle", { ...data });
     //     return response.data;
     // },
 
     async getTitleChildById(data: any) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/getTitleChildById", { data })
+        const response = await api.post("/pmTitle/getTitleChildById", { data })
         return response.data;
     },
 
     async EditpmTitleChild(data: any) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/EditpmTitleChild", { data })
+        const response = await api.post("/pmTitle/EditpmTitleChild", { data })
         return response.data;
     },
 
     async getTitleChildData(data: any) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/getTitleChildData", { data })
+        const response = await api.post("/pmTitle/getTitleChildData", { data })
         return response.data;
     },
 
     async getAllTitleInfo(data: any) {
-        const response = await axios.post("http://localhost:3000/api/pmTitle/getAllTitleInfo", { data })
+        const response = await api.post("/pmTitle/getAllTitleInfo", { data })
         return response.data.data;
     }
 };

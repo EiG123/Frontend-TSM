@@ -36,49 +36,49 @@ api.interceptors.response.use(
 export const DevManage = {
     async deleteUserById(data: any) {
         const response = await api.post(
-            "http://localhost:3000/api/DevManage/deleteUserById", data
+            "/DevManage/deleteUserById", data
         );
         return response.data;
     },
 
     async getAllUser() {
         const response = await api.get(
-            "http://localhost:3000/api/DevManage/getAllUser"
+            "/DevManage/getAllUser"
         );
         return response.data;
     },
 
     async getAllRole() {
         const response = await api.get(
-            "http://localhost:3000/api/DevManage/getAllRole"
+            "/DevManage/getAllRole"
         );
         return response.data;
     },
 
     async getAllPermission() {
         const response = await api.get(
-            "http://localhost:3000/api/DevManage/getAllPermission"
+            "/DevManage/getAllPermission"
         );
         return response.data;
     },
 
     async getAllRoleWithPermission() {
         const response = await api.get(
-            "http://localhost:3000/api/DevManage/getAllRoleWithPermission"
+            "/DevManage/getAllRoleWithPermission"
         );
         return response.data;
     },
 
     async savePermissions(data: any) {
         const response = await api.post(
-            "http://localhost:3000/api/DevManage/savePermissions", data
+            "/DevManage/savePermissions", data
         );
         return response.data;
     },
 
     async deleteRole(data: any) {
         const response = await api.post(
-            "http://localhost:3000/api/DevManage/deleteRole", data
+            "/DevManage/deleteRole", data
         );
         return response.data;
     },
@@ -86,7 +86,7 @@ export const DevManage = {
 
     async getUserById(data: any) {
         const response = await api.post(
-            "http://localhost:3000/api/DevManage/getUserById", data
+            "/DevManage/getUserById", data
         );
         return response.data;
     },
@@ -100,28 +100,28 @@ export const DevManage = {
 
     async AddRole(data: any) {
         const response = await api.post(
-            "http://localhost:3000/api/DevManage/AddRole", data
+            "/DevManage/AddRole", data
         );
         return response.data;
     },
 
     async addPermission(data: any) {
         const response = await api.post(
-            "http://localhost:3000/api/DevManage/addPermission", data
+            "/DevManage/addPermission", data
         );
         return response.data;
     },
 
     async updatePermission(data: any) {
         const response = await api.post(
-            "http://localhost:3000/api/DevManage/updatePermission", data
+            "/DevManage/updatePermission", data
         );
         return response.data;
     },
 
     async deletePermission(data: any) {
         const response = await api.post(
-            "http://localhost:3000/api/DevManage/deletePermission", data
+            "/DevManage/deletePermission", data
         );
         return response.data;
     },

@@ -3,7 +3,7 @@ import { api } from "../api.api";
 export const UserManage = {
     async getProfileData(data: any) {
         const response = await api.post(
-            "/UserLocation/getProfileData", data
+            "/UserManage/getProfileData", data
         );
         return response.data.data;
     },

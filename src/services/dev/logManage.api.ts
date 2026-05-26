@@ -1,9 +1,9 @@
-import axios from "axios";
+import { api } from "../api.api";
 
 export const logManage = {
     async getLogs(data: any) {
-        const response = await axios.post(
-            "http://localhost:3000/api/DevManage/getLogs", data
+        const response = await api.post(
+            "/DevManage/getLogs", data
         );
         return response.data;
     },

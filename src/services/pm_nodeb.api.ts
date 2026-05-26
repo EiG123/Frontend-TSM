@@ -1,8 +1,4 @@
-import axios from 'axios';
-
-const api = axios.create({
-    baseURL: 'http://localhost:3000/api/pmInsert'
-});
+import { api } from './api.api';
 
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
@@ -15,7 +11,7 @@ api.interceptors.request.use((config) => {
 
 export const PMApiService = {
     async pre_pm_nodeb(data: any) {
-        const response = await api.post("/pm_nodeb", {
+        const response = await api.post("/pmInsert/pm_nodeb", {
             ...data
         });
         return response.data;
@@ -31,7 +27,7 @@ export const PMApiService = {
     // },
 
     async PmsubmitData(data: any) {
-        const response = await api.post("/PmsubmitData",
+        const response = await api.post("/pmInsert/PmsubmitData",
             data
             , {
                 headers: {

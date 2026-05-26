@@ -1,9 +1,4 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
-  timeout: 300000, // 5 นาที
-});
+import { api } from "../api.api";
 
 // Request interceptor - เพิ่ม token
 api.interceptors.request.use(
@@ -45,7 +40,7 @@ export const networkAVAManage = {
       console.log(key, (value as File).name);
     }
     const response = await api.post(
-      "http://localhost:3000/api/NetworkAVA/UploadSitesAVA",
+      "/NetworkAVA/UploadSitesAVA",
       formData
     );
 
@@ -58,7 +53,7 @@ export const networkAVAManage = {
       console.log(key, (value as File).name);
     }
     const response = await api.post(
-      "http://localhost:3000/api/NetworkAVA/UploadIncidentTT",
+      "/NetworkAVA/UploadIncidentTT",
       formData
     );
 
@@ -71,7 +66,7 @@ export const networkAVAManage = {
       console.log(key, (value as File).name);
     }
     const response = await api.post(
-      "http://localhost:3000/api/NetworkAVA/UploadTop100SitesAVA",
+      "/NetworkAVA/UploadTop100SitesAVA",
       formData
     );
 
@@ -80,7 +75,7 @@ export const networkAVAManage = {
 
   async AVAChart(data: any) {
     const response = await api.post(
-      "http://localhost:3000/api/NetworkAVA/AVAChart", data
+      "/NetworkAVA/AVAChart", data
     );
 
     return response.data;
@@ -88,7 +83,7 @@ export const networkAVAManage = {
 
   async AVAChartALL(data: any) {
     const response = await api.post(
-      "http://localhost:3000/api/NetworkAVA/AVAChartALL", data
+      "/NetworkAVA/AVAChartALL", data
     );
 
     return response.data;
@@ -96,7 +91,7 @@ export const networkAVAManage = {
 
   async AVAChartALL_graph(data: any) {
     const response = await api.post(
-      "http://localhost:3000/api/NetworkAVA/AVAChartALL_graph", data
+      "/NetworkAVA/AVAChartALL_graph", data
     );
 
     return response.data;
@@ -104,7 +99,7 @@ export const networkAVAManage = {
 
   async AVAChartALL_incident(data: any) {
     const response = await api.post(
-      "http://localhost:3000/api/NetworkAVA/AVAChartALL_incident", data
+      "/NetworkAVA/AVAChartALL_incident", data
     );
 
     return response.data;

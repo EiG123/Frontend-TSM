@@ -1,4 +1,3 @@
-import axios from "axios";
 import { api } from "../api.api";
 
 // Request interceptor - เพิ่ม token
@@ -36,36 +35,36 @@ api.interceptors.response.use(
 
 export const AdminManage = {
     async getAllUser() {
-        const response = await axios.get(
-            "http://localhost:3000/api/AdminManage/getAllUser"
+        const response = await api.get(
+            "/AdminManage/getAllUser"
         );
         return response.data;
     },
 
     async getUserById(data: any) {
-        const response = await axios.post(
-            "http://localhost:3000/api/AdminManage/getUserById", data
+        const response = await api.post(
+            "/AdminManage/getUserById", data
         );
         return response.data;
     },
 
     async userEdit(data: any) {
         const response = await api.post(
-            "http://localhost:3000/api/AdminManage/userEdit", data
+            "/AdminManage/userEdit", data
         );
         return response.data;
     },
 
     async getAllRole(){
-        const response = await axios.get(
-            "http://localhost:3000/api/AdminManage/getAllRole"
+        const response = await api.get(
+            "/AdminManage/getAllRole"
         );
         return response.data;
     },
 
     async deleteUserById(data: any){
         const response = await api.post(
-            "http://localhost:3000/api/AdminManage/deleteUserById", data
+            "/AdminManage/deleteUserById", data
         );
         return response.data;
     },

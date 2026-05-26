@@ -1,9 +1,4 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
-  timeout: 300000, // 5 นาที
-});
+import { api } from "../api.api";
 
 // Request interceptor - เพิ่ม token
 api.interceptors.request.use(
@@ -44,7 +39,7 @@ export const CableFiberOpticManage = {
     formData.append("file", file);
 
     const response = await api.post(
-      "http://localhost:3000/api/CalbleFiberOptic/UploadCable",
+      "/CalbleFiberOptic/UploadCable",
       formData
     );
 
@@ -53,7 +48,7 @@ export const CableFiberOpticManage = {
 
   async getAllCable() {
     const response = await api.post(
-      "http://localhost:3000/api/CalbleFiberOptic/getAllCable"
+      "/CalbleFiberOptic/getAllCable"
     );
 
     return response.data.data;
@@ -61,7 +56,7 @@ export const CableFiberOpticManage = {
 
   async getCableById(data: any) {
     const response = await api.post(
-      "http://localhost:3000/api/CalbleFiberOptic/getCableById", data
+      "/CalbleFiberOptic/getCableById", data
     );
 
     return response.data.data;
@@ -69,7 +64,7 @@ export const CableFiberOpticManage = {
 
   async deleteCable(data: any) {
     const response = await api.post(
-      "http://localhost:3000/api/CalbleFiberOptic/deleteCable", data
+      "/CalbleFiberOptic/deleteCable", data
     );
 
     return response.data.data;
@@ -77,7 +72,7 @@ export const CableFiberOpticManage = {
 
   async updateCable(formData: any) {
     const response = await api.post(
-      "http://localhost:3000/api/CalbleFiberOptic/updateCable", formData
+      "/CalbleFiberOptic/updateCable", formData
 
     );
     return response.data.data;
@@ -85,7 +80,7 @@ export const CableFiberOpticManage = {
 
   async downloadCable(data: any) {
     const response = await api.post(
-      "http://localhost:3000/api/CalbleFiberOptic/downloadCable", data, {
+      "/CalbleFiberOptic/downloadCable", data, {
       responseType: "blob",
     }
     );

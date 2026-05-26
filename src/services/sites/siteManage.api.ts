@@ -1,9 +1,4 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
-  timeout: 300000, // 5 นาที
-});
+import { api } from "../api.api";
 
 // Request interceptor - เพิ่ม token
 api.interceptors.request.use(
@@ -40,8 +35,8 @@ api.interceptors.response.use(
 
 export const siteManage = {
   async getAllSite() {
-    const response = await axios.get(
-      "http://localhost:3000/api/siteManage/getAllSite"
+    const response = await api.get(
+      "/siteManage/getAllSite"
     );
     return response.data;
   },

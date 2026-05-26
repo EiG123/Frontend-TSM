@@ -1,15 +1,15 @@
-import axios from "axios";
+import { api } from "./api.api";
 
 export const getPmList = {
   async getPmList(data: any){
-    const res = await axios.post(
-      "http://localhost:3000/api/pmGetPmData/pmGetPmList", data
+    const res = await api.post(
+      "/pmGetPmData/pmGetPmList", data
     );
     return res.data;
   },
   async getPmById(id: any) {
-    const res = await axios.post(
-      "http://localhost:3000/api/pmGetPmData/getPmDataById", {id}
+    const res = await api.post(
+      "/pmGetPmData/getPmDataById", {id}
     );
     return res.data;
   },

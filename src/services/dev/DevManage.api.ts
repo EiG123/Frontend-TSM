@@ -1,9 +1,4 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
-  timeout: 300000, // 5 นาที
-});
+import { api } from "../api.api";
 
 // Request interceptor - เพิ่ม token
 api.interceptors.request.use(
@@ -98,7 +93,7 @@ export const DevManage = {
 
     async userEdit(data: any) {
         const response = await api.post(
-            "http://localhost:3000/api/DevManage/userEdit", data
+            "/userEdit", data
         );
         return response.data;
     },

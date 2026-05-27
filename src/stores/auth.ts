@@ -34,10 +34,10 @@ export const useAuthStore = defineStore("auth", {
     userRegion: (state) => state.user?.region,
 
     hasPermission: (state) => {
-      // console.log(state.user?.permissions);
-      return (permission: string) => {
+      return (...permissions: string[]) => {
         const perms = state.user?.permissions || [];
-        return perms.includes('*') || perms.includes(permission);
+        if (perms.includes('*')) return true;
+        return permissions.some((permission) => perms.includes(permission));
       };
     }
 

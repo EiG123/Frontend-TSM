@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-import { useAuthStore } from "../../stores/auth";
 import { AdminManage } from "../../services/admin/AdminManage.api";
 
 const router = useRouter();
@@ -69,6 +68,8 @@ const handleEditUser = async () => {
   loading.value = true;
 
   console.log(role.value);
+
+  console.log("Role ID ", roleId.value);
   // Call register API
   const result = await AdminManage.userEdit({
     id: userId.value,

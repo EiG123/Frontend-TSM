@@ -39,7 +39,7 @@ onMounted(async () => {
     const allRoleAPI = await DevManage.getAllRole();
     allRole.value = allRoleAPI.data.result;
     console.log(resUser.data.result);
-    console.log(allRole.value);
+    console.log("All Role", allRole.value);
     email.value = resUser.data.result[0].email;
     username.value = resUser.data.result[0].username;
     phone.value = resUser.data.result[0].phone;

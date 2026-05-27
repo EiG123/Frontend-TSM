@@ -317,23 +317,19 @@ const routes = [
         path: "/",
         meta: {
             requiresAuth: true
+            ,
+            permissions: ["PM"]
         },
         children: [
             {
                 path: "PM",
                 name: "PM",
                 component: PM,
-                meta: {
-                    permissions: ["view_pm"]
-                }
             },
             {
                 path: "pm_nodeb",
                 name: "pm_nodeb",
                 component: pm_nodeb,
-                meta: {
-                    permissions: ["view_pm_nodeb"]
-                }
             },
             {
                 path: "pm_page",
@@ -350,9 +346,6 @@ const routes = [
                 props: (route: RouteLocationNormalized) => ({
                     type: route.query.type,
                 }),
-                meta: {
-                    permissions: ["create_pm_nodeb"]
-                }
             },
             {
                 path: "pm_site_detail",

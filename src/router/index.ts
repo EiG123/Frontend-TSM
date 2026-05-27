@@ -316,9 +316,8 @@ const routes = [
     {
         path: "/",
         meta: {
-            requiresAuth: true
-            ,
-            permissions: ["PM"]
+            requiresAuth: true,
+            permissions: ["admin"]
         },
         children: [
             {

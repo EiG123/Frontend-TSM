@@ -82,7 +82,7 @@ const goAdmin = () => { router.push("/admin/adminDashboard"); emit("close"); };
 
       <!-- Admin -->
       <button
-        v-if="authStore.hasPermission('admin_dashboard')"
+        v-if="authStore.hasPermission('admin')"
         @click="goAdmin"
         class="w-full flex items-center gap-3 px-4 py-3 rounded-lg
                text-white bg-red-600 hover:bg-red-700

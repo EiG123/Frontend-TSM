@@ -49,7 +49,7 @@ export const useAuthStore = defineStore("auth", {
         const data = await AuthApiService.login(email, password);
         // console.log("LOGIN RESPONSE:", data);
         console.log(data);
-        // console.log(this.user?.permissions);
+        console.log(this.user?.permissions);
 
         // เช็คว่า response สำเร็จหรือไม่
         if (!data.success || !data.token) {

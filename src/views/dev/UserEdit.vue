@@ -29,7 +29,7 @@ const showPassword = ref(false);
 const showConfirmedPassword = ref(false);
 
 const role = ref("");
-const roleId = ref<number | null>(null);
+const roleId = ref(0);
 const allRole = ref([]);
 
 onMounted(async () => {
@@ -66,7 +66,8 @@ const handleEditUser = async () => {
   loading.value = true;
 
   console.log(role.value);
-  console.log(roleId.value);
+  console.log("ROLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE IDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+  console.log("Role ID", roleId.value);
   // Call register API
   const result = await DevManage.userEdit({
     id: userId.value,

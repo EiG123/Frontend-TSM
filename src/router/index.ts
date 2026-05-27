@@ -196,14 +196,49 @@ const routes = [
         component: MainCableOpticFiber
 
     },
-    {
-        path: "/MainNetworkAVA",
-        name: "MainNetworkAVA",
-        meta: {
-            requiresAuth: true
-        },
-        component: MainNetworkAVA
 
+    {
+        path: "/",
+        meta: {
+            requiresAuth: true,
+            permissions: ["AVA"]
+        },
+        children: [
+            {
+                path: "MainNetworkAVA",
+                name: "MainNetworkAVA",
+                component: MainNetworkAVA
+            },
+            {
+                path: "Top100NetworkAVA",
+                name: "Top100NetworkAVA",
+                component: Top100NetworkAVA
+            },
+            {
+                path: "network_availability_sites_and_incident_ALL",
+                component: network_availability_sites_and_incident_ALL,
+            },
+
+            {
+                path: "network_availability_sites_and_incident",
+                component: network_availability_sites_and_incident,
+            },
+
+            {
+                path: "network_availability_upload_sites_ava",
+                component: network_availability_upload_sites_ava,
+            },
+
+            {
+                path: "network_availability_upload_incident_ticket",
+                component: network_availability_upload_incident_ticket,
+            },
+
+            {
+                path: "network_availability_dashboard",
+                component: network_availability_dashboard,
+            },
+        ]
     },
     {
         path: "/siteLocationView",
@@ -212,14 +247,6 @@ const routes = [
             requiresAuth: true
         },
         component: siteLocationView
-    },
-    {
-        path: "/Top100NetworkAVA",
-        name: "Top100NetworkAVA",
-        meta: {
-            requiresAuth: true
-        },
-        component: Top100NetworkAVA
     },
     {
 
@@ -253,46 +280,6 @@ const routes = [
     },
 
     {
-        path: "/network_availability_sites_and_incident_ALL",
-        meta: {
-            requiresAuth: true
-        },
-        component: network_availability_sites_and_incident_ALL,
-    },
-
-    {
-        path: "/network_availability_sites_and_incident",
-        meta: {
-            requiresAuth: true
-        },
-        component: network_availability_sites_and_incident,
-    },
-
-    {
-        path: "/network_availability_upload_sites_ava",
-        meta: {
-            requiresAuth: true
-        },
-        component: network_availability_upload_sites_ava,
-    },
-
-    {
-        path: "/network_availability_upload_incident_ticket",
-        meta: {
-            requiresAuth: true
-        },
-        component: network_availability_upload_incident_ticket,
-    },
-
-    {
-        path: "/network_availability_dashboard",
-        meta: {
-            requiresAuth: true
-        },
-        component: network_availability_dashboard,
-    },
-
-    {
         path: "/pmDashBoardAI",
         meta: {
             requiresAuth: true
@@ -317,7 +304,7 @@ const routes = [
         path: "/",
         meta: {
             requiresAuth: true,
-            permissions: ["admin"]
+            permissions: ["PM"]
         },
         children: [
             {

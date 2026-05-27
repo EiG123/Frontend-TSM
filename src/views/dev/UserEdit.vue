@@ -66,6 +66,7 @@ const handleEditUser = async () => {
   loading.value = true;
 
   console.log(role.value);
+  console.log(roleId.value);
   // Call register API
   const result = await DevManage.userEdit({
     id: userId.value,

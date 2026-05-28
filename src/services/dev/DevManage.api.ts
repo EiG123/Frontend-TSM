@@ -93,7 +93,7 @@ export const DevManage = {
 
     async userEdit(data: any) {
         const response = await api.post(
-            "/userEdit", data
+            "/AdminManage/userEdit", data
         );
         return response.data;
     },

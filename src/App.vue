@@ -25,7 +25,7 @@ const closeMobileMenu = () => {
 <template>
   <div
     class="min-h-screen
-           bg-[url('src/assets/bg.png')]
+           bg-[url('/src/assets/bg.png')]
            bg-cover
            bg-center
            bg-no-repeat

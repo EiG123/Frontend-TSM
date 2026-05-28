@@ -86,7 +86,7 @@ const goRegister = () => {
             <h2
               class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 mb-2"
             >
-              ยินดีต้อนรับ
+              TSM
             </h2>
             <p class="text-gray-600 dark:text-slate-400">
               กรุณาเข้าสู่ระบบเพื่อดำเนินการต่อ

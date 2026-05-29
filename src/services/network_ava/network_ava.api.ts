@@ -35,6 +35,7 @@ api.interceptors.response.use(
 
 export const networkAVAManage = {
   async UploadSitesAVA(formData: FormData) {
+    console.log("UploadSitesAVA");
     // เพิ่มก่อน API call
     for (const [key, value] of formData.entries()) {
       console.log(key, (value as File).name);

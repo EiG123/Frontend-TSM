@@ -72,8 +72,7 @@ export const CableFiberOpticManage = {
 
   async updateCable(formData: any) {
     const response = await api.post(
-      "/CalbleFiberOptic/updateCable", formData
-
+      "/CalbleFiberOptic/updateCable", formData, { timeout: 120000 }
     );
     return response.data.data;
   },

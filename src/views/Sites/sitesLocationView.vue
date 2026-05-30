@@ -4,8 +4,26 @@ import { siteManage } from "../../services/sites/siteManage.api";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
+// ── Types ──────────────────────────────────────────────
+interface Operator {
+  operator_id: number;
+  operator_name: string;
+}
+
+interface Site {
+  id: number;
+  site_code: string;
+  site_name: string;
+  region?: string;
+  province?: string;
+  amphur?: string;
+  latitude?: number | string;
+  longitude?: number | string;
+  operators?: Operator[];
+}
+
 // ── Data State ─────────────────────────────────────────
-const sites = ref<any[]>([]);
+const sites = ref<Site[]>([]);
 const searchQuery = ref("");
 const visibleSiteIds = ref<Set<number>>(new Set());
 const expandedRegions = ref<Record<string, boolean>>({});
@@ -14,6 +32,82 @@ const expandedProvinces = ref<Record<string, boolean>>({});
 // ── Map State ──────────────────────────────────────────
 let map: maplibregl.Map | null = null;
 const markersMap = new Map<number, maplibregl.Marker>();
+
+// ── Operator Color Logic ───────────────────────────────
+// Priority: TRUE(แดง) > DTAC(ฟ้า) > อื่น(เทา)
+const getMarkerColor = (operators?: Operator[]): string => {
+  if (!operators || operators.length === 0) return "#9ca3af"; // เทา
+  const names = operators.map((o) => o.operator_name?.toUpperCase());
+  if (names.includes("TRUE")) return "#ef4444";  // แดง
+  if (names.includes("DTAC")) return "#3b82f6";  // ฟ้า
+  return "#9ca3af"; // เทา
+};
+
+// Badge สำหรับแสดงใน Sidebar
+const getOperatorBadges = (operators?: Operator[]) => {
+  if (!operators || operators.length === 0) return [];
+  return operators.map((o) => {
+    const name = o.operator_name?.toUpperCase();
+    if (name === "TRUE") return { label: o.operator_name, color: "bg-red-100 text-red-600" };
+    if (name === "DTAC") return { label: o.operator_name, color: "bg-blue-100 text-blue-600" };
+    return { label: o.operator_name, color: "bg-gray-100 text-gray-500" };
+  });
+};
+
+// Dot color สำหรับ indicator ใน sidebar
+const getSiteDotColor = (site: Site): string => {
+  if (!site.operators || site.operators.length === 0) return "bg-gray-300";
+  const names = site.operators.map((o) => o.operator_name?.toUpperCase());
+  if (names.includes("TRUE")) return "bg-red-500";
+  if (names.includes("DTAC")) return "bg-blue-500";
+  return "bg-gray-400";
+};
+
+// Popup HTML
+const buildPopupHTML = (site: Site): string => {
+  const operatorRows =
+    site.operators && site.operators.length > 0
+      ? site.operators
+          .map((o) => {
+            const name = o.operator_name?.toUpperCase();
+            const color =
+              name === "TRUE"
+                ? "#ef4444"
+                : name === "DTAC"
+                ? "#3b82f6"
+                : "#9ca3af";
+            return `
+              <span style="
+                display:inline-flex;align-items:center;gap:4px;
+                background:${color}18;color:${color};
+                font-size:10px;font-weight:600;
+                padding:2px 6px;border-radius:9999px;
+                border:1px solid ${color}40;
+              ">
+                <span style="width:6px;height:6px;border-radius:50%;background:${color};display:inline-block"></span>
+                ${o.operator_name}
+              </span>`;
+          })
+          .join(" ")
+      : `<span style="font-size:10px;color:#9ca3af">ไม่มีข้อมูล Operator</span>`;
+
+  return `
+    <div style="padding:6px 4px;min-width:160px">
+      <div style="font-size:13px;font-weight:700;color:#111;margin-bottom:2px">
+        ${site.site_code || "-"}
+      </div>
+      <div style="font-size:11px;color:#555;margin-bottom:6px">
+        ${site.site_name || ""}
+      </div>
+      <div style="font-size:10px;color:#888;margin-bottom:6px">
+        ${site.amphur || ""} · ${site.province || ""}
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px">
+        ${operatorRows}
+      </div>
+    </div>
+  `;
+};
 
 // ── Load Data ──────────────────────────────────────────
 const loadData = async () => {
@@ -34,13 +128,14 @@ const filteredSites = computed(() => {
       s.site_code?.toLowerCase().includes(q) ||
       s.site_name?.toLowerCase().includes(q) ||
       s.province?.toLowerCase().includes(q) ||
-      s.amphur?.toLowerCase().includes(q)
+      s.amphur?.toLowerCase().includes(q) ||
+      s.operators?.some((o) => o.operator_name?.toLowerCase().includes(q))
   );
 });
 
 // ── Computed: Folder Tree ──────────────────────────────
 const groupedSites = computed(() => {
-  const tree: Record<string, Record<string, Record<string, any[]>>> = {};
+  const tree: Record<string, Record<string, Record<string, Site[]>>> = {};
   filteredSites.value.forEach((site) => {
     const region = site.region || "ไม่ระบุภาค";
     const province = site.province || "ไม่ระบุจังหวัด";
@@ -98,66 +193,43 @@ const toggleAll = () => {
   });
 };
 
-// ── Helpers: ดึง site ทั้งหมดใน Region / Province ──────
-const getSitesInRegion = (region: string): any[] => {
-  return Object.values(groupedSites.value[region] || {}).flatMap((amphurs) =>
+// ── Helpers ────────────────────────────────────────────
+const getSitesInRegion = (region: string): Site[] =>
+  Object.values(groupedSites.value[region] || {}).flatMap((amphurs) =>
     Object.values(amphurs).flat()
   );
-};
 
-const getSitesInProvince = (region: string, province: string): any[] => {
-  return Object.values(groupedSites.value[region]?.[province] || {}).flat();
-};
+const getSitesInProvince = (region: string, province: string): Site[] =>
+  Object.values(groupedSites.value[region]?.[province] || {}).flat();
 
-const getSitesInAmphur = (region: string, province: string, amphur: string): any[] => {
-  return groupedSites.value[region]?.[province]?.[amphur] || [];
-};
+const getSitesInAmphur = (region: string, province: string, amphur: string): Site[] =>
+  groupedSites.value[region]?.[province]?.[amphur] || [];
 
-// ── Checkbox State: Region ─────────────────────────────
-const regionCheckState = (region: string): "all" | "none" | "indeterminate" => {
-  const sitesInRegion = getSitesInRegion(region);
-  if (sitesInRegion.length === 0) return "none";
-  const visibleCount = sitesInRegion.filter((s) => visibleSiteIds.value.has(s.id)).length;
-  if (visibleCount === 0) return "none";
-  if (visibleCount === sitesInRegion.length) return "all";
+// ── Checkbox States ────────────────────────────────────
+const checkState = (siteList: Site[]): "all" | "none" | "indeterminate" => {
+  if (siteList.length === 0) return "none";
+  const count = siteList.filter((s) => visibleSiteIds.value.has(s.id)).length;
+  if (count === 0) return "none";
+  if (count === siteList.length) return "all";
   return "indeterminate";
 };
 
-// ── Checkbox State: Province ───────────────────────────
-const provinceCheckState = (region: string, province: string): "all" | "none" | "indeterminate" => {
-  const sitesInProvince = getSitesInProvince(region, province);
-  if (sitesInProvince.length === 0) return "none";
-  const visibleCount = sitesInProvince.filter((s) => visibleSiteIds.value.has(s.id)).length;
-  if (visibleCount === 0) return "none";
-  if (visibleCount === sitesInProvince.length) return "all";
-  return "indeterminate";
-};
-
-// ── Checkbox State: Amphur ─────────────────────────────
-const amphurCheckState = (region: string, province: string, amphur: string): "all" | "none" | "indeterminate" => {
-  const sitesInAmphur = getSitesInAmphur(region, province, amphur);
-  if (sitesInAmphur.length === 0) return "none";
-  const visibleCount = sitesInAmphur.filter((s) => visibleSiteIds.value.has(s.id)).length;
-  if (visibleCount === 0) return "none";
-  if (visibleCount === sitesInAmphur.length) return "all";
-  return "indeterminate";
-};
+const regionCheckState = (region: string) => checkState(getSitesInRegion(region));
+const provinceCheckState = (region: string, province: string) => checkState(getSitesInProvince(region, province));
+const amphurCheckState = (region: string, province: string, amphur: string) => checkState(getSitesInAmphur(region, province, amphur));
 
 // ── Core: Add / Remove Marker ──────────────────────────
-const addMarker = (site: any) => {
+const addMarker = (site: Site) => {
   if (!map || !site.latitude || !site.longitude || markersMap.has(site.id)) return;
-  const marker = new maplibregl.Marker({ color: "#3b82f6" })
+
+  const color = getMarkerColor(site.operators);
+  const marker = new maplibregl.Marker({ color })
     .setLngLat([Number(site.longitude), Number(site.latitude)])
     .setPopup(
-      new maplibregl.Popup({ offset: 25 }).setHTML(`
-        <div style="padding:4px 2px">
-          <strong style="font-size:13px">${site.site_code || "-"}</strong><br/>
-          <span style="font-size:11px;color:#555">${site.site_name || ""}</span><br/>
-          <span style="font-size:10px;color:#888">${site.amphur || ""} · ${site.province || ""}</span>
-        </div>
-      `)
+      new maplibregl.Popup({ offset: 25 }).setHTML(buildPopupHTML(site))
     )
     .addTo(map);
+
   markersMap.set(site.id, marker);
 };
 
@@ -166,7 +238,7 @@ const removeMarker = (siteId: number) => {
   markersMap.delete(siteId);
 };
 
-// ── Core: Fit map ──────────────────────────────────────
+// ── Core: Fit Map ──────────────────────────────────────
 const fitMapToVisible = () => {
   if (!map || visibleSiteIds.value.size === 0) return;
   const coords: [number, number][] = [];
@@ -188,8 +260,8 @@ const fitMapToVisible = () => {
   );
 };
 
-// ── Toggle: Site (คลิกชื่อ) ───────────────────────────
-const toggleSite = (site: any) => {
+// ── Toggle Site ────────────────────────────────────────
+const toggleSite = (site: Site) => {
   if (!site.latitude || !site.longitude) return;
   const newSet = new Set(visibleSiteIds.value);
   if (newSet.has(site.id)) {
@@ -203,72 +275,35 @@ const toggleSite = (site: any) => {
   fitMapToVisible();
 };
 
-// ── Toggle: Amphur Checkbox ────────────────────────────
-const toggleAmphurCheckbox = (region: string, province: string, amphur: string) => {
-  const sitesInAmphur = getSitesInAmphur(region, province, amphur);
-  const state = amphurCheckState(region, province, amphur);
+// ── Toggle Folder Checkboxes ───────────────────────────
+const toggleBulk = (siteList: Site[], state: "all" | "none" | "indeterminate") => {
   const newSet = new Set(visibleSiteIds.value);
-  const shouldShow = state !== "all"; // ถ้าไม่ครบ → เปิดทั้งหมด; ถ้าครบแล้ว → ปิดทั้งหมด
-  sitesInAmphur.forEach((site) => {
-    if (shouldShow) {
-      addMarker(site);
-      newSet.add(site.id);
-    } else {
-      removeMarker(site.id);
-      newSet.delete(site.id);
-    }
+  const shouldShow = state !== "all";
+  siteList.forEach((site) => {
+    if (shouldShow) { addMarker(site); newSet.add(site.id); }
+    else { removeMarker(site.id); newSet.delete(site.id); }
   });
   visibleSiteIds.value = newSet;
   fitMapToVisible();
 };
 
-// ── Toggle: Province Checkbox ──────────────────────────
-const toggleProvinceCheckbox = (region: string, province: string) => {
-  const sitesInProvince = getSitesInProvince(region, province);
-  const state = provinceCheckState(region, province);
-  const newSet = new Set(visibleSiteIds.value);
-  const shouldShow = state !== "all";
-  sitesInProvince.forEach((site) => {
-    if (shouldShow) {
-      addMarker(site);
-      newSet.add(site.id);
-    } else {
-      removeMarker(site.id);
-      newSet.delete(site.id);
-    }
-  });
-  visibleSiteIds.value = newSet;
-  fitMapToVisible();
-};
+const toggleRegionCheckbox = (region: string) =>
+  toggleBulk(getSitesInRegion(region), regionCheckState(region));
 
-// ── Toggle: Region Checkbox ────────────────────────────
-const toggleRegionCheckbox = (region: string) => {
-  const sitesInRegion = getSitesInRegion(region);
-  const state = regionCheckState(region);
-  const newSet = new Set(visibleSiteIds.value);
-  const shouldShow = state !== "all";
-  sitesInRegion.forEach((site) => {
-    if (shouldShow) {
-      addMarker(site);
-      newSet.add(site.id);
-    } else {
-      removeMarker(site.id);
-      newSet.delete(site.id);
-    }
-  });
-  visibleSiteIds.value = newSet;
-  fitMapToVisible();
-};
+const toggleProvinceCheckbox = (region: string, province: string) =>
+  toggleBulk(getSitesInProvince(region, province), provinceCheckState(region, province));
+
+const toggleAmphurCheckbox = (region: string, province: string, amphur: string) =>
+  toggleBulk(getSitesInAmphur(region, province, amphur), amphurCheckState(region, province, amphur));
 
 // ── Clear All ──────────────────────────────────────────
 const clearAll = () => {
-  markersMap.forEach((marker) => marker.remove());
+  markersMap.forEach((m) => m.remove());
   markersMap.clear();
   visibleSiteIds.value = new Set();
 };
 
 // ── Directive: v-indeterminate ─────────────────────────
-// ใช้กับ <input type="checkbox"> เพื่อตั้ง .indeterminate property
 const vIndeterminate = {
   updated(el: HTMLInputElement, binding: { value: boolean }) {
     el.indeterminate = binding.value;
@@ -303,19 +338,30 @@ onMounted(async () => {
       <div class="p-4 border-b border-gray-100 bg-gray-50">
         <h2 class="text-lg font-bold text-gray-900">รายชื่อโครงข่าย (Sites)</h2>
         <div class="flex items-center justify-between mt-1">
-          <p class="text-xs text-gray-500">
-            แสดง {{ filteredSites.length }} / {{ sites.length }} สถานี
-          </p>
+          <p class="text-xs text-gray-500">แสดง {{ filteredSites.length }} / {{ sites.length }} สถานี</p>
           <div v-if="visibleSiteIds.size > 0" class="flex items-center gap-2">
             <span class="text-xs bg-blue-100 text-blue-600 font-semibold px-2 py-0.5 rounded-full">
               📍 {{ visibleSiteIds.size }} จุด
             </span>
-            <button
-              @click="clearAll"
-              class="text-xs text-red-400 hover:text-red-600 transition-colors"
-            >✕ ล้าง</button>
+            <button @click="clearAll" class="text-xs text-red-400 hover:text-red-600 transition-colors">
+              ✕ ล้าง
+            </button>
           </div>
         </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="px-3 py-2 border-b border-gray-100 flex items-center gap-3 bg-gray-50">
+        <span class="text-[10px] text-gray-400 font-medium">สี Operator:</span>
+        <span class="flex items-center gap-1 text-[10px] text-red-500 font-semibold">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500 inline-block"></span> TRUE
+        </span>
+        <span class="flex items-center gap-1 text-[10px] text-blue-500 font-semibold">
+          <span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span> DTAC
+        </span>
+        <span class="flex items-center gap-1 text-[10px] text-gray-400 font-semibold">
+          <span class="w-2.5 h-2.5 rounded-full bg-gray-400 inline-block"></span> อื่นๆ
+        </span>
       </div>
 
       <!-- Search Bar -->
@@ -325,7 +371,7 @@ onMounted(async () => {
           <input
             v-model="searchQuery"
             type="text"
-            placeholder="ค้นหา site code, ชื่อ, จังหวัด..."
+            placeholder="ค้นหา site, จังหวัด, operator..."
             class="w-full pl-8 pr-8 py-1.5 text-sm border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent placeholder-gray-400"
           />
           <button
@@ -338,10 +384,7 @@ onMounted(async () => {
 
       <!-- Expand / Collapse All -->
       <div class="px-3 py-1.5 border-b border-gray-100 flex justify-end">
-        <button
-          @click="toggleAll"
-          class="text-xs text-blue-500 hover:text-blue-700 hover:underline transition-colors"
-        >
+        <button @click="toggleAll" class="text-xs text-blue-500 hover:text-blue-700 hover:underline transition-colors">
           {{ isAllExpanded ? "ปิดทั้งหมด ▲" : "เปิดทั้งหมด ▼" }}
         </button>
       </div>
@@ -356,9 +399,7 @@ onMounted(async () => {
 
         <!-- ── Region ── -->
         <div v-for="(provinces, region) in groupedSites" :key="region" class="space-y-1">
-          <div class="flex items-center gap-1 p-2 hover:bg-gray-100 rounded group">
-
-            <!-- Checkbox Region -->
+          <div class="flex items-center gap-1.5 p-2 hover:bg-gray-100 rounded group">
             <input
               type="checkbox"
               v-indeterminate="regionCheckState(region) === 'indeterminate'"
@@ -366,16 +407,10 @@ onMounted(async () => {
               @change.stop="toggleRegionCheckbox(region)"
               class="w-3.5 h-3.5 rounded accent-blue-500 cursor-pointer shrink-0"
             />
-
-            <!-- Folder label (คลิกเพื่อ expand/collapse) -->
-            <div
-              @click="toggleRegion(region)"
-              class="flex items-center gap-1.5 flex-1 cursor-pointer font-medium text-gray-700 min-w-0"
-            >
-              <span
-                class="text-[10px] inline-block transition-transform duration-200 shrink-0"
-                :class="{ 'rotate-90': expandedRegions[region] }"
-              >▶</span>
+            <div @click="toggleRegion(region)"
+              class="flex items-center gap-1.5 flex-1 cursor-pointer font-medium text-gray-700 min-w-0">
+              <span class="text-[10px] inline-block transition-transform duration-200 shrink-0"
+                :class="{ 'rotate-90': expandedRegions[region] }">▶</span>
               <span class="truncate">📁 {{ region }}</span>
               <span class="text-[10px] text-gray-400 shrink-0 ml-auto pr-1">
                 ({{ getSitesInRegion(region).length }})
@@ -386,9 +421,7 @@ onMounted(async () => {
           <!-- ── Province ── -->
           <div v-if="expandedRegions[region]" class="pl-4 space-y-1">
             <div v-for="(amphurs, province) in provinces" :key="province" class="space-y-1">
-              <div class="flex items-center gap-1 p-2 hover:bg-gray-100 rounded group">
-
-                <!-- Checkbox Province -->
+              <div class="flex items-center gap-1.5 p-2 hover:bg-gray-100 rounded group">
                 <input
                   type="checkbox"
                   v-indeterminate="provinceCheckState(region, province) === 'indeterminate'"
@@ -396,16 +429,10 @@ onMounted(async () => {
                   @change.stop="toggleProvinceCheckbox(region, province)"
                   class="w-3.5 h-3.5 rounded accent-blue-500 cursor-pointer shrink-0"
                 />
-
-                <!-- Folder label -->
-                <div
-                  @click="toggleProvince(province)"
-                  class="flex items-center gap-1.5 flex-1 cursor-pointer text-gray-600 min-w-0"
-                >
-                  <span
-                    class="text-[10px] inline-block transition-transform duration-200 shrink-0"
-                    :class="{ 'rotate-90': expandedProvinces[province] }"
-                  >▶</span>
+                <div @click="toggleProvince(province)"
+                  class="flex items-center gap-1.5 flex-1 cursor-pointer text-gray-600 min-w-0">
+                  <span class="text-[10px] inline-block transition-transform duration-200 shrink-0"
+                    :class="{ 'rotate-90': expandedProvinces[province] }">▶</span>
                   <span class="truncate">📂 {{ province }}</span>
                   <span class="text-[10px] text-gray-400 shrink-0 ml-auto pr-1">
                     ({{ getSitesInProvince(region, province).length }})
@@ -413,12 +440,10 @@ onMounted(async () => {
                 </div>
               </div>
 
-              <!-- ── Amphur + Sites ── -->
+              <!-- ── Amphur ── -->
               <div v-if="expandedProvinces[province]" class="pl-4 space-y-1">
                 <div v-for="(siteList, amphur) in amphurs" :key="amphur">
-
-                  <!-- Amphur label row + checkbox -->
-                  <div class="flex items-center gap-1 p-1.5 bg-gray-50 rounded-sm">
+                  <div class="flex items-center gap-1.5 p-1.5 bg-gray-50 rounded-sm">
                     <input
                       type="checkbox"
                       v-indeterminate="amphurCheckState(region, province, amphur) === 'indeterminate'"
@@ -431,27 +456,44 @@ onMounted(async () => {
                     </span>
                   </div>
 
-                  <!-- Site Items -->
+                  <!-- ── Site Items ── -->
                   <div class="pl-2 mt-0.5 space-y-0.5">
                     <div
                       v-for="site in siteList"
                       :key="site.id"
                       @click="toggleSite(site)"
                       :class="[
-                        'p-2 rounded text-xs cursor-pointer transition-all flex items-center gap-1.5',
+                        'p-2 rounded text-xs cursor-pointer transition-all border-l-4',
                         visibleSiteIds.has(site.id)
-                          ? 'bg-blue-50 text-blue-600 font-semibold border-l-4 border-blue-500'
-                          : 'text-gray-600 hover:bg-gray-50 border-l-4 border-transparent'
+                          ? 'bg-blue-50 font-semibold border-blue-500'
+                          : 'text-gray-600 hover:bg-gray-50 border-transparent'
                       ]"
                     >
-                      <span
-                        class="shrink-0 w-1.5 h-1.5 rounded-full transition-colors"
-                        :class="visibleSiteIds.has(site.id) ? 'bg-blue-500' : 'bg-gray-300'"
-                      />
-                      <span class="font-mono bg-gray-100 px-1 py-0.5 rounded text-[10px] text-gray-500 shrink-0">
-                        {{ site.site_code }}
-                      </span>
-                      <span class="truncate">{{ site.site_name }}</span>
+                      <!-- Row 1: dot + site_code + site_name -->
+                      <div class="flex items-center gap-1.5 min-w-0">
+                        <!-- dot สีตาม operator -->
+                        <span class="shrink-0 w-2 h-2 rounded-full transition-colors"
+                          :class="visibleSiteIds.has(site.id) ? getSiteDotColor(site) : 'bg-gray-300'"
+                        />
+                        <span class="font-mono bg-gray-100 px-1 py-0.5 rounded text-[10px] text-gray-500 shrink-0">
+                          {{ site.site_code }}
+                        </span>
+                        <span class="truncate" :class="visibleSiteIds.has(site.id) ? 'text-blue-700' : 'text-gray-700'">
+                          {{ site.site_name }}
+                        </span>
+                      </div>
+
+                      <!-- Row 2: Operator badges -->
+                      <div v-if="site.operators && site.operators.length > 0"
+                        class="flex flex-wrap gap-1 mt-1.5 pl-3.5">
+                        <span
+                          v-for="badge in getOperatorBadges(site.operators)"
+                          :key="badge.label"
+                          :class="['text-[10px] font-semibold px-1.5 py-0.5 rounded-full', badge.color]"
+                        >
+                          {{ badge.label }}
+                        </span>
+                      </div>
                     </div>
                   </div>
 

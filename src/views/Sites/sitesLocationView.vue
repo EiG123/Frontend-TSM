@@ -20,6 +20,7 @@ const loadData = async () => {
     sites.value = res.data.result || [];
 
     console.log("Total Sites:", sites.value.length);
+    console.log(sites);
 
     // อัปเดตข้อมูลเข้า Map Source โดยตรง
     updateMapSource();

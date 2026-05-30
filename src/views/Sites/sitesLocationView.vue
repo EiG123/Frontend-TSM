@@ -1,178 +1,94 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { siteManage } from "../../services/sites/siteManage.api";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
+// ── Data State ────────────────────────────────────────
 const sites = ref<any[]>([]);
+const selectedSite = ref<any>(null);
 
-// ── Map ────────────────────────────────────────────────
+// ใช้สำหรับเก็บสถานะ เปิด/ปิด ของเมนู Folder แต่ละชั้น
+const expandedRegions = ref<Record<string, boolean>>({});
+const expandedProvinces = ref<Record<string, boolean>>({});
+
+// ── Map State ─────────────────────────────────────────
 let map: maplibregl.Map | null = null;
-const SOURCE_ID = "sites-source";
-const LAYER_CLUSTER_ID = "clusters";
-const LAYER_CLUSTER_COUNT_ID = "cluster-count";
-const LAYER_UNCLUSTERED_ID = "unclustered-point";
+let currentMarker: maplibregl.Marker | null = null;
 
 // โหลดข้อมูล Site
 const loadData = async () => {
   try {
     const res = await siteManage.getAllSite();
     sites.value = res.data.result || [];
-
     console.log("Total Sites:", sites.value.length);
-    console.log(sites);
-
-    // อัปเดตข้อมูลเข้า Map Source โดยตรง
-    updateMapSource();
   } catch (error) {
     console.error("Load site error:", error);
   }
 };
 
-// แปลงข้อมูลเป็น GeoJSON และอัปเดต Source ของ Map
-const updateMapSource = () => {
-  if (!map || !map.isStyleLoaded()) return;
+// ── Computed: จัดกลุ่มข้อมูลเป็น Folder Structure ──────
+// โครงสร้างที่ได้: { "ภาคเหนือ": { "เชียงใหม่": { "เมืองเชียงใหม่": [ site1, site2 ] } } }
+const groupedSites = computed(() => {
+  const tree: Record<string, Record<string, Record<string, any[]>>> = {};
 
-  // กรองเฉพาะ site ที่มีพิกัดครบถ้วน
-  const validSites = sites.value.filter(site => site.latitude && site.longitude);
+  sites.value.forEach((site) => {
+    // กำหนดค่าเริ่มต้นหากข้อมูลใน DB ไม่มีพิกัดหรือชื่อระบุย่อย
+    const region = site.region || "ไม่ระบุภาค";
+    const province = site.province || "ไม่ระบุจังหวัด";
+    const amphur = site.amphur || "ไม่ระบุอำเภอ";
 
-  const geojson: GeoJSON.FeatureCollection = {
-    type: "FeatureCollection",
-    features: validSites.map((site) => ({
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [Number(site.longitude), Number(site.latitude)],
-      },
-      properties: {
-        site_code: site.site_code || "-",
-        site_name: site.site_name || "",
-      },
-    })),
-  };
+    if (!tree[region]) tree[region] = {};
+    if (!tree[region][province]) tree[region][province] = {};
+    if (!tree[region][province][amphur]) tree[region][province][amphur] = [];
 
-  const source = map.getSource(SOURCE_ID) as maplibregl.GeoJSONSource;
-  if (source) {
-    source.setData(geojson);
-  }
+    tree[region][province][amphur].push(site);
+  });
+
+  return tree;
+});
+
+// ── ฟังก์ชันควบคุมแผงเมนู Folder ────────────────────────
+const toggleRegion = (region: string) => {
+  expandedRegions.value[region] = !expandedRegions.value[region];
 };
 
-// ตั้งค่า Layer และ Event ต่างๆ ของ Map
-const setupMapLayers = () => {
-  if (!map) return;
+const toggleProvince = (province: string) => {
+  expandedProvinces.value[province] = !expandedProvinces.value[province];
+};
 
-  // 1. เพิ่ม GeoJSON Source พร้อมเปิดใช้งาน Cluster
-  map.addSource(SOURCE_ID, {
-    type: "geojson",
-    data: { type: "FeatureCollection", features: [] }, // เริ่มต้นว่างๆ
-    cluster: true,
-    clusterMaxZoom: 14, // ซูมถึงระดับนี้แล้วจะกระจายตัวออกทั้งหมด
-    clusterRadius: 50,  // รัศมีในการรวมกลุ่มหมุด (พิกเซล)
+// ── ฟังก์ชันเมื่อคลิกเลือก Site (ซูมแผนที่ไปที่จุดนั้น) ──
+const selectSite = (site: any) => {
+  if (!map || !site.latitude || !site.longitude) return;
+
+  selectedSite.value = site;
+  const lng = Number(site.longitude);
+  const lat = Number(site.latitude);
+
+  // 1. เลื่อนแผนที่ไปที่พิกัดของ Site นั้น
+  map.flyTo({
+    center: [lng, lat],
+    zoom: 15, // ซูมเข้าไปใกล้ๆ เห็นระดับถนน
+    essential: true,
+    duration: 1500 // ความเร็วในการเลื่อน (มิลลิวินาที)
   });
 
-  // 2. Layer สำหรับกลุ่มหมุด (Clusters)
-  map.addLayer({
-    id: LAYER_CLUSTER_ID,
-    type: "circle",
-    source: SOURCE_ID,
-    filter: ["has", "point_count"],
-    paint: {
-      "circle-color": [
-        "step",
-        ["get", "point_count"],
-        "#51bbd6", 100,  // ถ้าหมุด < 100 สีฟ้า
-        "#f1f075", 750,  // ถ้าหมุด 100 - 749 สีเหลือง
-        "#f28cb1",       // ถ้าหมุด >= 750 สีชมพู
-      ],
-      "circle-radius": [
-        "step",
-        ["get", "point_count"],
-        20, 100,         // ขนาดวงกลมตามจำนวนหมุด
-        30, 750,
-        40,
-      ],
-    },
-  });
+  // 2. เคลียร์หมุดเก่า (ถ้ามี) แล้วปักหมุดใหม่จุดที่เลือกจุดเดียวพอ เพื่อความลื่นไหล
+  if (currentMarker) currentMarker.remove();
 
-  // 3. Layer ตัวเลขแสดงจำนวนในกลุ่ม (Cluster Count)
-  map.addLayer({
-    id: LAYER_CLUSTER_COUNT_ID,
-    type: "symbol",
-    source: SOURCE_ID,
-    filter: ["has", "point_count"],
-    layout: {
-      "text-field": "{point_count_abbreviated}",
-      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-      "text-size": 12,
-    },
-  });
-
-  // 4. Layer สำหรับหมุดเดี่ยวๆ ที่ไม่ได้รวมกลุ่ม (Unclustered Point)
-  map.addLayer({
-    id: LAYER_UNCLUSTERED_ID,
-    type: "circle",
-    source: SOURCE_ID,
-    filter: ["!", ["has", "point_count"]],
-    paint: {
-      "circle-color": "#11b4da",
-      "circle-radius": 8,
-      "circle-stroke-width": 1,
-      "circle-stroke-color": "#fff",
-    },
-  });
-
-  // ── MAP EVENTS ───────────────────────────────────────
-
-  // คลิกที่ Cluster แล้วให้ Zoom เข้าไปจุดนั้น
-  map.on("click", LAYER_CLUSTER_ID, async (e) => {
-    const features = map!.queryRenderedFeatures(e.point, {
-      layers: [LAYER_CLUSTER_ID],
-    });
-    const clusterId = features[0].properties.cluster_id;
-    
-    const source = map!.getSource(SOURCE_ID) as maplibregl.GeoJSONSource;
-    const zoom = await source.getClusterExpansionZoom(clusterId);
-    
-    const coordinates = (features[0].geometry as GeoJSON.Point).coordinates;
-
-    map!.easeTo({
-      center: coordinates as [number, number],
-      zoom: zoom,
-    });
-  });
-
-  // คลิกที่หมุดเดี่ยว เพื่อแสดง Popup
-  map.on("click", LAYER_UNCLUSTERED_ID, (e) => {
-    if (!e.features || e.features.length === 0) return;
-    
-    const feature = e.features[0];
-    const coordinates = (feature.geometry as GeoJSON.Point).coordinates.slice() as [number, number];
-    const { site_code, site_name } = feature.properties!;
-
-    // ป้องกันปัญหาเรื่อง Wrap-around ของแผนที่โลก
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    }
-
-    new maplibregl.Popup()
-      .setLngLat(coordinates)
-      .setHTML(`
-        <div style="color: #333; font-family: sans-serif;">
-          <strong>${site_code}</strong><br>
-          ${site_name}
+  currentMarker = new maplibregl.Marker({ color: "#ef4444" }) // หมุดสีแดงเด่นๆ
+    .setLngLat([lng, lat])
+    .setPopup(
+      new maplibregl.Popup({ offset: 25 }).setHTML(`
+        <div class="p-1">
+          <strong class="text-sm">${site.site_code || "-"}</strong><br>
+          <span class="text-xs text-gray-600">${site.site_name || ""}</span>
         </div>
       `)
-      .addTo(map!);
-  });
+    )
+    .addTo(map);
 
-  // เปลี่ยน Cursor เป็นรูปมือเวลา Hover หมุด
-  const onMouseEnter = () => (map!.getCanvas().style.cursor = "pointer");
-  const onMouseLeave = () => (map!.getCanvas().style.cursor = "");
-  
-  map.on("mouseenter", LAYER_CLUSTER_ID, onMouseEnter);
-  map.on("mouseleave", LAYER_CLUSTER_ID, onMouseLeave);
-  map.on("mouseenter", LAYER_UNCLUSTERED_ID, onMouseEnter);
-  map.on("mouseleave", LAYER_UNCLUSTERED_ID, onMouseLeave);
+  currentMarker.togglePopup();
 };
 
 // ── Map init ───────────────────────────────────────────
@@ -180,21 +96,12 @@ const initMap = () => {
   map = new maplibregl.Map({
     container: "map",
     style: "https://tiles.openfreemap.org/styles/positron",
-    center: [98.9853, 18.7883], // เชียงใหม่
-    zoom: 10,
+    center: [100.5018, 13.7563], // เริ่มต้นที่ กรุงเทพฯ
+    zoom: 6, // ซูมออกแบบเห็นภาพรวมประเทศ
   });
 
   map.addControl(new maplibregl.NavigationControl(), "top-right");
   map.addControl(new maplibregl.ScaleControl(), "bottom-left");
-
-  // เมื่อ Map สไตล์โหลดเสร็จแล้วค่อยสร้าง Layer
-  map.on("load", () => {
-    setupMapLayers();
-    // ถ้าข้อมูล API มาถึงก่อน Map โหลดเสร็จ ให้รีเฟรชข้อมูลใส่ซ้ำอีกรอบ
-    if (sites.value.length > 0) {
-      updateMapSource();
-    }
-  });
 };
 
 onMounted(async () => {
@@ -204,7 +111,80 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="w-full h-screen">
-    <div id="map" class="w-full h-full"></div>
+  <div class="flex w-full h-screen font-sans antialiased text-gray-800">
+    
+    <div class="w-80 h-full bg-white border-r border-gray-200 flex flex-col shadow-lg z-10">
+      <div class="p-4 border-b border-gray-100 bg-gray-50">
+        <h2 class="text-lg font-bold text-gray-900">รายชื่อโครงข่าย (Sites)</h2>
+        <p class="text-xs text-gray-500 mt-1">ทั้งหมด {{ sites.length }} สถานี</p>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-2 space-y-1 select-none text-sm">
+        
+        <div v-for="(provinces, region) in groupedSites" :key="region" class="space-y-1">
+          <div 
+            @click="toggleRegion(region)"
+            class="flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer font-medium text-gray-700"
+          >
+            <span class="mr-2 transition-transform duration-200" :class="{ 'rotate-90': expandedRegions[region] }">▶</span>
+            📁 {{ region }}
+          </div>
+
+          <div v-if="expandedRegions[region]" class="pl-4 space-y-1">
+            <div v-for="(amphurs, province) in provinces" :key="province" class="space-y-1">
+              <div 
+                @click="toggleProvince(province)"
+                class="flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-gray-600"
+              >
+                <span class="mr-2 transition-transform duration-200" :class="{ 'rotate-90': expandedProvinces[province] }">▶</span>
+                📂 {{ province }}
+              </div>
+
+              <div v-if="expandedProvinces[province]" class="pl-4 space-y-1">
+                <div v-for="(siteList, amphur) in amphurs" :key="amphur}">
+                  <div class="p-1.5 pl-2 text-xs font-semibold text-gray-400 bg-gray-50 rounded-sm">
+                    📍 {{ amphur }} ({{ siteList.length }})
+                  </div>
+
+                  <div class="pl-2 mt-1 space-y-0.5">
+                    <div 
+                      v-for="site in siteList" 
+                      :key="site.id"
+                      @click="selectSite(site)"
+                      :class="[
+                        'p-2 rounded text-xs cursor-pointer transition-colors truncate',
+                        selectedSite?.id === site.id 
+                          ? 'bg-blue-50 text-blue-600 font-semibold border-l-4 border-blue-500' 
+                          : 'text-gray-600 hover:bg-gray-50'
+                      ]"
+                    >
+                      <span class="font-mono bg-gray-100 px-1 py-0.5 rounded mr-1 text-[10px] text-gray-500">
+                        {{ site.site_code }}
+                      </span>
+                      {{ site.site_name }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="flex-1 h-full relative">
+      <div id="map" class="w-full h-full"></div>
+    </div>
+
   </div>
 </template>
+
+<style scoped>
+/* สไตล์สำหรับการหมุนลูกศรเปิด/ปิดโฟลเดอร์ */
+.rotate-90 {
+  transform: rotate(90deg);
+}
+</style>

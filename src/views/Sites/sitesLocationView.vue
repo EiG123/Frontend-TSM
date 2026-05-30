@@ -141,7 +141,7 @@ onMounted(async () => {
               </div>
 
               <div v-if="expandedProvinces[province]" class="pl-4 space-y-1">
-                <div v-for="(siteList, amphur) in amphurs" :key="amphur}">
+                <div v-for="(siteList, amphur) in amphurs" :key="amphur">
                   <div class="p-1.5 pl-2 text-xs font-semibold text-gray-400 bg-gray-50 rounded-sm">
                     📍 {{ amphur }} ({{ siteList.length }})
                   </div>

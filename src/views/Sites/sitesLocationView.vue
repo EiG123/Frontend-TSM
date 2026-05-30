@@ -113,6 +113,7 @@ const buildPopupHTML = (site: Site): string => {
 const loadData = async () => {
   try {
     const res = await siteManage.getAllSite();
+    console.log(res);
     sites.value = res.data.result || [];
   } catch (error) {
     console.error("Load site error:", error);
